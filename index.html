@@ -795,7 +795,7 @@
             <div class="mood-bubble">✨ TODAY IS... <b>설렘 ♬</b></div>
             
             <label class="avatar-frame" title="내 컴퓨터에서 프로필 사진 선택">
-              <img id="profile-img" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='115' height='115' fill='%23f2f4f6'><rect width='115' height='115' fill='%23eef4f8'/><text x='50%' y='53%' font-size='12' text-anchor='middle' fill='%238c97a8' font-family='sans-serif'>사진 변경 (클릭)</text></svg>" alt="프로필 사진" />
+              <img id="profile-img" src="./profile.png" alt="프로필 사진" />
               <input type="file" id="profile-upload" class="hidden-file-input" accept="image/*" />
             </label>
 
@@ -843,7 +843,6 @@
                 <option value="위시리스트">위시리스트</option>
               </select>
               
-              <!-- 위시리스트 선택 시 세부 장르 선택창 -->
               <select id="post-sub-category" class="form-control" style="width: 110px; display: none;">
                 <option value="드라마">드라마</option>
                 <option value="영화">영화</option>
@@ -853,7 +852,6 @@
 
               <input type="text" id="post-title" class="form-control" placeholder="작품 이름이나 제목을 적어주세요" required />
 
-              <!-- 위시리스트가 아닐 때만 별점 노출 -->
               <select id="post-rating" class="form-control" style="width: 110px;">
                 <option value="5">★★★★★ (5점)</option>
                 <option value="4">★★★★☆ (4점)</option>
@@ -895,14 +893,14 @@
     // 1. 투데이 카운터
     function initStats() {
       const todayKey = 'cute_today_' + new Date().toISOString().slice(0, 10);
-      let total = parseInt(localStorage.getItem('cute_total_stat_v17') || '320', 10);
+      let total = parseInt(localStorage.getItem('cute_total_stat_v18') || '320', 10);
       let today = parseInt(localStorage.getItem(todayKey) || '0', 10);
 
-      if (!sessionStorage.getItem('cute_session_active_v17')) {
+      if (!sessionStorage.getItem('cute_session_active_v18')) {
         total += 1;
         today += 1;
-        sessionStorage.setItem('cute_session_active_v17', 'true');
-        localStorage.setItem('cute_total_stat_v17', total);
+        sessionStorage.setItem('cute_session_active_v18', 'true');
+        localStorage.setItem('cute_total_stat_v18', total);
         localStorage.setItem(todayKey, today);
       }
 
@@ -939,14 +937,14 @@
       reader.readAsDataURL(file);
     }
 
-    // 3. 게시글 데이터 (요청하신 코멘트 문구 적용)
-    let archivePosts = JSON.parse(localStorage.getItem('cute_archive_posts_v17')) || [
+    // 3. 게시글 데이터 (각 작품별 사진 파일명 적용)
+    let archivePosts = JSON.parse(localStorage.getItem('cute_archive_posts_v18')) || [
       {
         id: 101,
         category: "드라마",
         title: "구르미 그린 달빛",
         rating: 5,
-        cover: "",
+        cover: "./gu.jpg",
         body: "한복 색감과 영상미, 그리고 감정을 섬세하게 전달하는 연출이 인상 깊었던 청춘 사극. '내 사람이다' 같은 명대사와 서정적인 OST가 작품 특유의 분위기를 완성해 준다.",
         date: "2026. 09. 09",
         comments: [
@@ -958,7 +956,7 @@
         category: "애니메이션",
         title: "나루토 (NARUTO)",
         rating: 5,
-        cover: "",
+        cover: "./naruto.jpg",
         body: "외톨이였던 소년이 자신의 닌자도를 지키며 성장하고 끝내 인정받는 벅찬 서사. 끈기와 유대감이라는 가치를 가장 가슴 뜨겁게 보여주는 영원한 소년만화의 명작.",
         date: "2026. 09. 09",
         comments: [
@@ -970,7 +968,7 @@
         category: "영화",
         title: "오디세이 (Odyssey)",
         rating: 5,
-        cover: "",
+        cover: "./ody.jpg",
         body: "광활한 우주와 미지의 시공간을 가로지르는 여정. 끝없는 고독 속에서도 인간다움과 희망의 끈을 놓지 않는 웅장하고 경이로운 대서사시.",
         date: "2026. 09. 08",
         comments: []
@@ -980,7 +978,7 @@
         category: "음악",
         title: "Tuide - TUNE & PLAY",
         rating: 5,
-        cover: "",
+        cover: "./tuide.jpg",
         body: "감각적인 비트와 청량한 멜로디가 일상에 산뜻한 에너지를 채워주는 곡. 작업할 때나 산책할 때 무한 반복하게 되는 취향 저격 트랙 ♬",
         date: "2026. 09. 07",
         comments: []
@@ -991,7 +989,7 @@
         subCategory: "드라마",
         title: "너 말고 다른 연애",
         rating: null,
-        cover: "",
+        cover: "./you.jpg",
         body: "오래된 연인의 감정선과 섬세한 현실 공감 연출이 돋보인다는 평이 많아서 보고싶다",
         date: "2026. 09. 16",
         comments: []
@@ -1002,7 +1000,7 @@
         subCategory: "영화",
         title: "경주기행",
         rating: null,
-        cover: "",
+        cover: "./geong.jpg",
         body: "배우들의 연기 합과 스토리 완성도가 높다는 호평이 많아서 영화관에서 꼭 보고싶다.",
         date: "2026. 09. 16",
         comments: []
@@ -1035,15 +1033,13 @@
     const cardImgPicker = document.getElementById("card-image-picker");
     const titleText = document.getElementById("title-text");
 
-    // 위시리스트 선택 시 세부 장르 표시 & 별점 숨김
     postCatSelect.addEventListener("change", (e) => {
       const isWish = e.target.value === "위시리스트";
       postSubCatSelect.style.display = isWish ? "block" : "none";
       postRatingSelect.style.display = isWish ? "none" : "block";
     });
 
-    // 프로필 복원
-    const savedAvatar = localStorage.getItem("cute_profile_img_v17");
+    const savedAvatar = localStorage.getItem("cute_profile_img_v18");
     if (savedAvatar) profileImg.src = savedAvatar;
 
     profileUpload.addEventListener("change", (e) => {
@@ -1051,18 +1047,16 @@
       if (file) {
         compressImage(file, (compressedBase64) => {
           profileImg.src = compressedBase64;
-          localStorage.setItem("cute_profile_img_v17", compressedBase64);
+          localStorage.setItem("cute_profile_img_v18", compressedBase64);
         }, 400);
       }
     });
 
-    // 작성 폼 토글
     toggleWriteBtn.addEventListener("click", () => {
       const isOpen = writePanel.classList.toggle("open");
       toggleWriteBtn.textContent = isOpen ? "✕ 닫기" : "✎ 새 글 남기기";
     });
 
-    // 사진 교체 트리거
     window.triggerCardImageUpload = function(id) {
       targetPostIdForImage = id;
       cardImgPicker.value = "";
@@ -1076,7 +1070,7 @@
           const post = archivePosts.find(p => p.id === targetPostIdForImage);
           if (post) {
             post.cover = compressedBase64;
-            localStorage.setItem('cute_archive_posts_v17', JSON.stringify(archivePosts));
+            localStorage.setItem('cute_archive_posts_v18', JSON.stringify(archivePosts));
             renderPosts();
           }
         });
@@ -1091,9 +1085,7 @@
       return `<div class="note-rating">${fullStars}${emptyStars} <span class="rating-num">(${r}.0)</span></div>`;
     }
 
-    // 화면 렌더링
     function renderPosts() {
-      // 홈(전체) 선택 시 위시리스트 항목은 제외하고 일반 기록만 노출
       const filtered = activeTab === "전체"
         ? archivePosts.filter(p => p.category !== "위시리스트")
         : archivePosts.filter(p => p.category === activeTab);
@@ -1110,17 +1102,13 @@
         const isEditing = editingPostId === post.id;
         const isWish = post.category === "위시리스트";
 
-        // 장르명은 그대로 표시 (예: 드라마, 영화 등)
         const displayCategoryName = isWish && post.subCategory ? post.subCategory : post.category;
-        
-        // 위시리스트 항목은 위시리스트 고유 색상(#ca8a04) 사용
         const badgeColor = isWish ? "var(--color-wish-badge)" : (categoryColors[displayCategoryName] || "var(--text-main)");
         const isMusic = displayCategoryName === "음악";
 
         return `
           <article class="note-card">
             <div class="note-card-header">
-              <!-- 장르 이름은 그대로, 위시 항목은 위시리스트 고유색으로 표시 -->
               <span class="note-category-tag" style="color: ${badgeColor};">
                 ● ${displayCategoryName}
               </span>
@@ -1247,13 +1235,12 @@
           post.rating = newRating;
         }
         post.body = newBody;
-        localStorage.setItem('cute_archive_posts_v17', JSON.stringify(archivePosts));
+        localStorage.setItem('cute_archive_posts_v18', JSON.stringify(archivePosts));
         editingPostId = null;
         renderPosts();
       }
     };
 
-    // 새 글 등록
     postForm.addEventListener("submit", (e) => {
       e.preventDefault();
       const cat = postCatSelect.value;
@@ -1280,7 +1267,7 @@
           comments: []
         });
 
-        localStorage.setItem('cute_archive_posts_v17', JSON.stringify(archivePosts));
+        localStorage.setItem('cute_archive_posts_v18', JSON.stringify(archivePosts));
         postForm.reset();
         postSubCatSelect.style.display = "none";
         postRatingSelect.style.display = "block";
@@ -1311,7 +1298,7 @@
       if (p) {
         if (!p.comments) p.comments = [];
         p.comments.push({ author, text });
-        localStorage.setItem('cute_archive_posts_v17', JSON.stringify(archivePosts));
+        localStorage.setItem('cute_archive_posts_v18', JSON.stringify(archivePosts));
         renderPosts();
         setTimeout(() => {
           const el = document.getElementById(`cmt-${id}`);
@@ -1323,7 +1310,7 @@
     window.deletePost = function(id) {
       if (confirm("이 기록을 삭제하시겠습니까?")) {
         archivePosts = archivePosts.filter(p => p.id !== id);
-        localStorage.setItem('cute_archive_posts_v17', JSON.stringify(archivePosts));
+        localStorage.setItem('cute_archive_posts_v18', JSON.stringify(archivePosts));
         renderPosts();
       }
     };
