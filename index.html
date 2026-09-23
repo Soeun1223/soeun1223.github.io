@@ -163,14 +163,8 @@
       background: #eaf1f5;
       border: 3px solid #ffffff;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.07);
-      cursor: pointer;
       position: relative;
       margin-bottom: 14px;
-      transition: transform 0.2s ease;
-    }
-
-    .avatar-frame:hover {
-      transform: scale(1.03);
     }
 
     .avatar-frame img {
@@ -287,46 +281,6 @@
       gap: 8px;
     }
 
-    .write-btn {
-      background: #2b303a;
-      color: #fff;
-      border: none;
-      padding: 7px 14px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .write-btn:hover {
-      background: #4a5568;
-    }
-
-    /* 작성 폼 */
-    .write-panel {
-      display: none;
-      background: #f8fafc;
-      border: 1px solid var(--note-border);
-      border-radius: 12px;
-      padding: 16px;
-      margin-bottom: 16px;
-    }
-
-    .write-panel.open {
-      display: block;
-      animation: fadeIn 0.2s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .form-group {
-      margin-bottom: 10px;
-    }
-
     .form-control {
       width: 100%;
       border: 1px solid #cbd5e1;
@@ -340,12 +294,6 @@
 
     .form-control:focus {
       border-color: var(--primary);
-    }
-
-    textarea.form-control {
-      resize: vertical;
-      min-height: 70px;
-      line-height: 1.6;
     }
 
     .submit-post-btn {
@@ -441,7 +389,6 @@
     .note-img-filled-wrap {
       position: relative;
       display: block;
-      cursor: pointer;
       border-radius: 10px;
       overflow: hidden;
       border: 1px solid #e2e8f0;
@@ -455,30 +402,6 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: opacity 0.2s;
-    }
-
-    .note-img-filled-wrap:hover .img-hover-overlay {
-      opacity: 1;
-    }
-
-    .img-hover-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 700;
-      opacity: 0;
-      transition: opacity 0.2s;
-      text-align: center;
-      padding: 10px;
     }
 
     .note-img-empty {
@@ -493,15 +416,8 @@
       text-align: center;
       padding: 12px;
       gap: 6px;
-      color: #4a90e2;
-      cursor: pointer;
+      color: #94a3b8;
       background: #f8fafc;
-      transition: all 0.2s;
-    }
-
-    .note-img-empty:hover {
-      border-color: var(--primary);
-      background: #f0f7ff;
     }
 
     .note-img-empty span {
@@ -569,47 +485,6 @@
       padding: 3px 10px;
     }
 
-    /* 수정 폼 */
-    .edit-mode-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      width: 100%;
-    }
-
-    .edit-header-row {
-      display: flex;
-      gap: 8px;
-    }
-
-    .edit-actions-row {
-      display: flex;
-      gap: 6px;
-      margin-top: 4px;
-    }
-
-    .save-edit-btn {
-      background: #3b82f6;
-      color: #fff;
-      border: none;
-      padding: 5px 12px;
-      border-radius: 6px;
-      font-size: 11px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .cancel-edit-btn {
-      background: #e2e8f0;
-      color: #475569;
-      border: none;
-      padding: 5px 12px;
-      border-radius: 6px;
-      font-size: 11px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
     .note-footer {
       display: flex;
       justify-content: space-between;
@@ -626,37 +501,6 @@
       display: flex;
       align-items: center;
       gap: 4px;
-    }
-
-    .card-actions-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .edit-btn {
-      background: none;
-      border: none;
-      color: #64748b;
-      font-size: 11px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .edit-btn:hover {
-      color: var(--primary);
-    }
-
-    .delete-btn {
-      background: none;
-      border: none;
-      color: #94a3b8;
-      font-size: 11px;
-      cursor: pointer;
-    }
-
-    .delete-btn:hover {
-      color: #ef4444;
     }
 
     /* 댓글 영역 */
@@ -765,8 +609,6 @@
       font-size: 13px;
     }
 
-    .hidden-file-input { display: none !important; }
-
     @media (max-width: 768px) {
       .note-card-content {
         flex-direction: column;
@@ -807,10 +649,9 @@
           <div class="profile-wrap">
             <div class="mood-bubble">✨ TODAY IS... <b>설렘 ♬</b></div>
             
-            <label class="avatar-frame" title="내 컴퓨터에서 프로필 사진 선택">
+            <div class="avatar-frame">
               <img id="profile-img" src="./profile.png" alt="프로필 사진" />
-              <input type="file" id="profile-upload" class="hidden-file-input" accept="image/*" />
-            </label>
+            </div>
 
             <div class="profile-desc">
               <h2>안녕하세요.<br>콘텐츠를 좋아하는<br>이소은입니다 ˙ᵕ˙</h2>
@@ -840,50 +681,6 @@
             <h1 class="page-title" id="title-text">전체보기</h1>
           </div>
 
-          <div class="header-actions">
-            <button class="write-btn" id="toggle-write-btn">✎ 새 글 남기기</button>
-          </div>
-        </div>
-
-        <div class="write-panel" id="write-panel">
-          <form id="post-form">
-            <div class="form-group" style="display: flex; gap: 8px;">
-              <select id="post-category" class="form-control" style="width: 120px;" required>
-                <option value="드라마">드라마</option>
-                <option value="애니메이션">애니메이션</option>
-                <option value="영화">영화</option>
-                <option value="음악">음악</option>
-                <option value="위시리스트">위시리스트</option>
-              </select>
-              
-              <select id="post-sub-category" class="form-control" style="width: 110px; display: none;">
-                <option value="드라마">드라마</option>
-                <option value="영화">영화</option>
-                <option value="애니메이션">애니메이션</option>
-                <option value="음악">음악</option>
-              </select>
-
-              <input type="text" id="post-title" class="form-control" placeholder="작품 이름이나 제목을 적어주세요" required />
-
-              <select id="post-rating" class="form-control" style="width: 110px;">
-                <option value="5">★★★★★ (5점)</option>
-                <option value="4">★★★★☆ (4점)</option>
-                <option value="3">★★★☆☆ (3점)</option>
-                <option value="2">★★☆☆☆ (2점)</option>
-                <option value="1">★☆☆☆☆ (1점)</option>
-              </select>
-            </div>
-            
-            <div class="form-group">
-              <label style="font-size: 11px; font-weight: 700; color: var(--text-sub); display: block; margin-bottom: 4px;">📷 커버 이미지 선택 (선택 사항)</label>
-              <input type="file" id="post-cover-file" class="form-control" accept="image/*" />
-            </div>
-
-            <div class="form-group">
-              <textarea id="post-body" class="form-control" placeholder="기억하고 싶은 명대사나 감상, 또는 보고 싶은 이유를 자유롭게 기록해보세요." required></textarea>
-            </div>
-            <button type="submit" class="submit-post-btn">등록하기</button>
-          </form>
         </div>
 
         <section class="page-scroll-content" id="records-container"></section>
@@ -899,8 +696,6 @@
       <button class="tab-item" data-cat="위시리스트">위시</button>
     </nav>
   </div>
-
-  <input type="file" id="card-image-picker" class="hidden-file-input" accept="image/*" />
 
   <script>
     // 1. 투데이 카운터
@@ -922,129 +717,8 @@
     }
     initStats();
 
-    // 2. 이미지 자동 압축
-    function compressImage(file, callback, maxWidth = 1000, quality = 0.82) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const img = new Image();
-        img.onload = () => {
-          const canvas = document.createElement('canvas');
-          let width = img.width;
-          let height = img.height;
-
-          if (width > maxWidth) {
-            height = Math.round((height * maxWidth) / width);
-            width = maxWidth;
-          }
-
-          canvas.width = width;
-          canvas.height = height;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, width, height);
-
-          const compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
-          callback(compressedDataUrl);
-        };
-        img.src = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
-
-    // 3. 게시글 데이터 (각 작품별 사진 파일명 적용)
-    let archivePosts = JSON.parse(localStorage.getItem('cute_archive_posts_v18')) || [
-      {
-        id: 101,
-        category: "드라마",
-        title: "구르미 그린 달빛",
-        rating: 5,
-        cover: "./gu.jpg",
-        body: "한복 색감과 영상미, 그리고 감정을 섬세하게 전달하는 연출이 인상 깊었던 청춘 사극. '내 사람이다' 같은 명대사와 서정적인 OST가 작품 특유의 분위기를 완성해 준다.",
-        tags: ["퓨전사극", "남장여자"],
-        date: "2026. 09. 09",
-        comments: [
-          { author: "친구1", text: "박보검이랑 김유정 케미 최고였지..." }
-        ]
-      },
-      {
-        id: 102,
-        category: "애니메이션",
-        title: "나루토 (NARUTO)",
-        rating: 5,
-        cover: "./naruto.jpg",
-        body: "외톨이였던 소년이 자신의 닌자도를 지키며 성장하고 끝내 인정받는 벅찬 서사. 끈기와 유대감이라는 가치를 가장 가슴 뜨겁게 보여주는 영원한 소년만화의 명작.",
-        tags: ["소년만화", "성장서사", "닌자"],
-        date: "2026. 09. 09",
-        comments: [
-          { author: "동기", text: "페인전은 아직도 주기적으로 정주행함" }
-        ]
-      },
-      {
-        id: 103,
-        category: "영화",
-        title: "오디세이 (Odyssey)",
-        rating: 5,
-        cover: "./ody.jpg",
-        body: "광활한 우주와 미지의 시공간을 가로지르는 여정. 끝없는 고독 속에서도 인간다움과 희망의 끈을 놓지 않는 웅장하고 경이로운 대서사시.",
-        tags: ["SF", "우주", "대서사시"],
-        date: "2026. 09. 08",
-        comments: []
-      },
-      {
-        id: 104,
-        category: "음악",
-        title: "Tuide - TUNE & PLAY",
-        rating: 5,
-        cover: "./tuide.jpg",
-        body: "감각적인 비트와 청량한 멜로디가 일상에 산뜻한 에너지를 채워주는 곡. 작업할 때나 산책할 때 무한 반복하게 되는 취향 저격 트랙 ♬",
-        tags: ["청량", "드라이브송"],
-        date: "2026. 09. 07",
-        comments: []
-      },
-      {
-        id: 108,
-        category: "음악",
-        title: "XG - NO GOOD",
-        rating: 5,
-        cover: "./no_good.webp",
-        body: "묵직한 베이스와 절제된 안무 포인트가 어우러진 강렬한 트랙. 파워풀한 보컬과 힙합 기반의 세련된 프로덕션이 XG만의 색을 확실하게 각인시켜주는 곡.",
-        tags: ["걸그룹", "힙합", "퍼포먼스"],
-        date: "2026. 09. 17",
-        comments: []
-      },
-      {
-        id: 107,
-        category: "드라마",
-        title: "달의 연인 - 보보경심 려",
-        rating: 5,
-        cover: "./moon_lover.png",
-        body: "현대 여성이 고려시대로 타임슬립하며 왕자들과 얽히는 사극 로맨스. 이준기와 아이유의 애틋한 케미, 그리고 마지막까지 여운이 진하게 남는 서정적인 결말이 오래도록 회자되는 명작.",
-        tags: ["사극", "타임슬립", "로맨스"],
-        date: "2026. 09. 16",
-        comments: []
-      },
-      {
-        id: 105,
-        category: "위시리스트",
-        subCategory: "드라마",
-        title: "너 말고 다른 연애",
-        rating: null,
-        cover: "./you.jpg",
-        body: "오래된 연인의 감정선과 섬세한 현실 공감 연출이 돋보인다는 평이 많아서 보고싶다",
-        date: "2026. 09. 16",
-        comments: []
-      },
-      {
-        id: 106,
-        category: "위시리스트",
-        subCategory: "영화",
-        title: "경주기행",
-        rating: null,
-        cover: "./geong.jpg",
-        body: "배우들의 연기 합과 스토리 완성도가 높다는 호평이 많아서 영화관에서 꼭 보고싶다.",
-        date: "2026. 09. 16",
-        comments: []
-      }
-    ];
+    // 2. 게시글 데이터 (각 작품별 사진 파일명 적용)
+    let archivePosts = [];
 
     const categoryColors = {
       "전체": "var(--tab-all)",
@@ -1056,65 +730,10 @@
     };
 
     let activeTab = "전체";
-    let targetPostIdForImage = null;
-    let editingPostId = null;
 
     const container = document.getElementById("records-container");
-    const toggleWriteBtn = document.getElementById("toggle-write-btn");
-    const writePanel = document.getElementById("write-panel");
-    const postForm = document.getElementById("post-form");
-    const postCatSelect = document.getElementById("post-category");
-    const postSubCatSelect = document.getElementById("post-sub-category");
-    const postRatingSelect = document.getElementById("post-rating");
     const tabButtons = document.querySelectorAll(".tab-item");
-    const profileUpload = document.getElementById("profile-upload");
-    const profileImg = document.getElementById("profile-img");
-    const cardImgPicker = document.getElementById("card-image-picker");
     const titleText = document.getElementById("title-text");
-
-    postCatSelect.addEventListener("change", (e) => {
-      const isWish = e.target.value === "위시리스트";
-      postSubCatSelect.style.display = isWish ? "block" : "none";
-      postRatingSelect.style.display = isWish ? "none" : "block";
-    });
-
-    const savedAvatar = localStorage.getItem("cute_profile_img_v18");
-    if (savedAvatar) profileImg.src = savedAvatar;
-
-    profileUpload.addEventListener("change", (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        compressImage(file, (compressedBase64) => {
-          profileImg.src = compressedBase64;
-          localStorage.setItem("cute_profile_img_v18", compressedBase64);
-        }, 400);
-      }
-    });
-
-    toggleWriteBtn.addEventListener("click", () => {
-      const isOpen = writePanel.classList.toggle("open");
-      toggleWriteBtn.textContent = isOpen ? "✕ 닫기" : "✎ 새 글 남기기";
-    });
-
-    window.triggerCardImageUpload = function(id) {
-      targetPostIdForImage = id;
-      cardImgPicker.value = "";
-      cardImgPicker.click();
-    };
-
-    cardImgPicker.addEventListener("change", (e) => {
-      const file = e.target.files[0];
-      if (file && targetPostIdForImage) {
-        compressImage(file, (compressedBase64) => {
-          const post = archivePosts.find(p => p.id === targetPostIdForImage);
-          if (post) {
-            post.cover = compressedBase64;
-            localStorage.setItem('cute_archive_posts_v18', JSON.stringify(archivePosts));
-            renderPosts();
-          }
-        });
-      }
-    });
 
     function renderStars(rating) {
       if (rating === null || rating === undefined) return '';
@@ -1144,7 +763,6 @@
 
       container.innerHTML = filtered.map(post => {
         const comments = post.comments || [];
-        const isEditing = editingPostId === post.id;
         const isWish = post.category === "위시리스트";
 
         const displayCategoryName = isWish && post.subCategory ? post.subCategory : post.category;
@@ -1163,48 +781,21 @@
             <div class="note-card-content">
               <div class="note-img-wrap ${isMusic ? 'is-music' : ''}">
                 ${post.cover ? `
-                  <div class="note-img-filled-wrap" onclick="triggerCardImageUpload(${post.id})" title="클릭하여 사진 교체하기">
+                  <div class="note-img-filled-wrap">
                     <img src="${post.cover}" class="note-img-filled" alt="${escapeHTML(post.title)}" />
-                    <div class="img-hover-overlay">
-                      <span>📷 사진 바꾸기<br>${isMusic ? '(1:1 앨범)' : '(3:4 포스터)'}</span>
-                    </div>
                   </div>
                 ` : `
-                  <div class="note-img-empty" onclick="triggerCardImageUpload(${post.id})" title="클릭하여 커버 사진 넣기">
-                    <span>📷 ${isMusic ? '앨범 커버' : '포스터'} 넣기<br>(클릭)</span>
-                    <small>${isMusic ? '1:1 정사각 비율' : '3:4 포스터 비율'}</small>
+                  <div class="note-img-empty">
+                    <span>📷 ${isMusic ? '앨범 커버' : '포스터'} 없음</span>
                   </div>
                 `}
               </div>
 
               <div class="note-text-wrap">
-                ${isEditing ? `
-                  <div class="edit-mode-wrap">
-                    <div class="edit-header-row">
-                      <input type="text" id="edit-title-${post.id}" class="form-control" value="${escapeHTML(post.title)}" placeholder="작품 이름" style="font-weight: 700;" />
-                      
-                      ${!isWish ? `
-                        <select id="edit-rating-${post.id}" class="form-control" style="width: 120px;">
-                          <option value="5" ${post.rating == 5 ? 'selected' : ''}>★★★★★ (5점)</option>
-                          <option value="4" ${post.rating == 4 ? 'selected' : ''}>★★★★☆ (4점)</option>
-                          <option value="3" ${post.rating == 3 ? 'selected' : ''}>★★★☆☆ (3점)</option>
-                          <option value="2" ${post.rating == 2 ? 'selected' : ''}>★★☆☆☆ (2점)</option>
-                          <option value="1" ${post.rating == 1 ? 'selected' : ''}>★☆☆☆☆ (1점)</option>
-                        </select>
-                      ` : ''}
-                    </div>
-                    <textarea id="edit-body-${post.id}" class="form-control" rows="4">${escapeHTML(post.body)}</textarea>
-                    <div class="edit-actions-row">
-                      <button class="save-edit-btn" onclick="savePostEdit(${post.id})">✓ 저장하기</button>
-                      <button class="cancel-edit-btn" onclick="cancelPostEdit()">취소</button>
-                    </div>
-                  </div>
-                ` : `
-                  <h3 class="note-title">${escapeHTML(post.title)}</h3>
-                  ${!isWish ? renderStars(post.rating) : ''}
-                  <p class="note-body">${escapeHTML(post.body)}</p>
-                  ${!isWish ? renderTags(post.tags, badgeColor) : ''}
-                `}
+                <h3 class="note-title">${escapeHTML(post.title)}</h3>
+                ${!isWish ? renderStars(post.rating) : ''}
+                <p class="note-body">${escapeHTML(post.body)}</p>
+                ${!isWish ? renderTags(post.tags, badgeColor) : ''}
               </div>
             </div>
 
@@ -1212,10 +803,6 @@
               <span class="comment-link" onclick="toggleComments(${post.id})">
                 💬 댓글 <b>${comments.length}</b>개
               </span>
-              <div class="card-actions-right">
-                ${!isEditing ? `<button class="edit-btn" onclick="startEditPost(${post.id})">✏ 코멘트 수정</button>` : ''}
-                <button class="delete-btn" onclick="deletePost(${post.id})">삭제</button>
-              </div>
             </div>
 
             <div class="comments-box" id="cmt-${post.id}">
@@ -1248,91 +835,37 @@
       }[tag] || tag));
     }
 
-    window.startEditPost = function(id) {
-      editingPostId = id;
-      renderPosts();
-    };
-
-    window.cancelPostEdit = function() {
-      editingPostId = null;
-      renderPosts();
-    };
-
-    window.savePostEdit = function(id) {
-      const titleInput = document.getElementById(`edit-title-${id}`);
-      const ratingSelect = document.getElementById(`edit-rating-${id}`);
-      const bodyInput = document.getElementById(`edit-body-${id}`);
-
-      if (!titleInput || !bodyInput) return;
-
-      const newTitle = titleInput.value.trim();
-      const newBody = bodyInput.value.trim();
-      const newRating = ratingSelect ? (parseInt(ratingSelect.value, 10) || 5) : null;
-
-      if (!newTitle) {
-        alert("제목을 입력해주세요!");
-        return;
-      }
-
-      const post = archivePosts.find(p => p.id === id);
-      if (post) {
-        post.title = newTitle;
-        if (post.category !== "위시리스트") {
-          post.rating = newRating;
-        }
-        post.body = newBody;
-        localStorage.setItem('cute_archive_posts_v18', JSON.stringify(archivePosts));
-        editingPostId = null;
-        renderPosts();
-      }
-    };
-
-    postForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const cat = postCatSelect.value;
-      const subCat = cat === "위시리스트" ? postSubCatSelect.value : "";
-      const title = document.getElementById("post-title").value.trim();
-      const rating = cat === "위시리스트" ? null : (parseInt(postRatingSelect.value, 10) || 5);
-      const body = document.getElementById("post-body").value.trim();
-      const fileInput = document.getElementById("post-cover-file");
-      const file = fileInput.files[0];
-
-      const now = new Date();
-      const dateStr = `${now.getFullYear()}. ${String(now.getMonth()+1).padStart(2,'0')}. ${String(now.getDate()).padStart(2,'0')}`;
-
-      const saveAndRender = (imageDataUrl) => {
-        archivePosts.unshift({
-          id: Date.now(),
-          category: cat,
-          subCategory: subCat,
-          title: title,
-          rating: rating,
-          cover: imageDataUrl || "",
-          body: body,
-          date: dateStr,
-          comments: []
-        });
-
-        localStorage.setItem('cute_archive_posts_v18', JSON.stringify(archivePosts));
-        postForm.reset();
-        postSubCatSelect.style.display = "none";
-        postRatingSelect.style.display = "block";
-        writePanel.classList.remove("open");
-        toggleWriteBtn.textContent = "✎ 새 글 남기기";
-        renderPosts();
-      };
-
-      if (file) {
-        compressImage(file, (base64) => saveAndRender(base64));
-      } else {
-        saveAndRender("");
-      }
-    });
-
     window.toggleComments = function(id) {
       const el = document.getElementById(`cmt-${id}`);
       if (el) el.classList.toggle("open");
     };
+
+    // 댓글은 방문자 브라우저별로만 남는 한계가 있어, 공유 게시글(posts.json)과
+    // 별도의 로컬 오버레이로 저장한다. 게시글 자체를 덮어쓰지 않기 위함.
+    function getLocalComments() {
+      try {
+        return JSON.parse(localStorage.getItem('cute_local_comments_v1')) || {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function saveLocalComment(postId, comment) {
+      const all = getLocalComments();
+      if (!all[postId]) all[postId] = [];
+      all[postId].push(comment);
+      localStorage.setItem('cute_local_comments_v1', JSON.stringify(all));
+    }
+
+    function applyLocalComments() {
+      const all = getLocalComments();
+      archivePosts.forEach(post => {
+        const extra = all[post.id];
+        if (extra && extra.length) {
+          post.comments = [...(post.comments || []), ...extra];
+        }
+      });
+    }
 
     window.submitComment = function(e, id) {
       e.preventDefault();
@@ -1343,8 +876,9 @@
       const p = archivePosts.find(item => item.id === id);
       if (p) {
         if (!p.comments) p.comments = [];
-        p.comments.push({ author, text });
-        localStorage.setItem('cute_archive_posts_v18', JSON.stringify(archivePosts));
+        const comment = { author, text };
+        p.comments.push(comment);
+        saveLocalComment(id, comment);
         renderPosts();
         setTimeout(() => {
           const el = document.getElementById(`cmt-${id}`);
@@ -1353,25 +887,27 @@
       }
     };
 
-    window.deletePost = function(id) {
-      if (confirm("이 기록을 삭제하시겠습니까?")) {
-        archivePosts = archivePosts.filter(p => p.id !== id);
-        localStorage.setItem('cute_archive_posts_v18', JSON.stringify(archivePosts));
-        renderPosts();
-      }
-    };
-
     tabButtons.forEach(btn => {
       btn.addEventListener("click", () => {
         tabButtons.forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
         activeTab = btn.dataset.cat;
-        editingPostId = null;
         renderPosts();
       });
     });
 
-    renderPosts();
+    async function loadPosts() {
+      try {
+        const res = await fetch('./posts.json');
+        archivePosts = await res.json();
+      } catch (e) {
+        archivePosts = [];
+      }
+      applyLocalComments();
+      renderPosts();
+    }
+
+    loadPosts();
   </script>
 </body>
 </html>
