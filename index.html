@@ -556,6 +556,19 @@
       white-space: pre-wrap;
     }
 
+    .note-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .note-tag {
+      font-size: 12px;
+      border-radius: 999px;
+      padding: 3px 10px;
+    }
+
     /* 수정 폼 */
     .edit-mode-wrap {
       display: flex;
@@ -946,6 +959,7 @@
         rating: 5,
         cover: "./gu.jpg",
         body: "한복 색감과 영상미, 그리고 감정을 섬세하게 전달하는 연출이 인상 깊었던 청춘 사극. '내 사람이다' 같은 명대사와 서정적인 OST가 작품 특유의 분위기를 완성해 준다.",
+        tags: ["퓨전사극", "남장여자"],
         date: "2026. 09. 09",
         comments: [
           { author: "친구1", text: "박보검이랑 김유정 케미 최고였지..." }
@@ -958,6 +972,7 @@
         rating: 5,
         cover: "./naruto.jpg",
         body: "외톨이였던 소년이 자신의 닌자도를 지키며 성장하고 끝내 인정받는 벅찬 서사. 끈기와 유대감이라는 가치를 가장 가슴 뜨겁게 보여주는 영원한 소년만화의 명작.",
+        tags: ["소년만화", "성장서사", "닌자"],
         date: "2026. 09. 09",
         comments: [
           { author: "동기", text: "페인전은 아직도 주기적으로 정주행함" }
@@ -970,6 +985,7 @@
         rating: 5,
         cover: "./ody.jpg",
         body: "광활한 우주와 미지의 시공간을 가로지르는 여정. 끝없는 고독 속에서도 인간다움과 희망의 끈을 놓지 않는 웅장하고 경이로운 대서사시.",
+        tags: ["SF", "우주", "대서사시"],
         date: "2026. 09. 08",
         comments: []
       },
@@ -980,6 +996,7 @@
         rating: 5,
         cover: "./tuide.jpg",
         body: "감각적인 비트와 청량한 멜로디가 일상에 산뜻한 에너지를 채워주는 곡. 작업할 때나 산책할 때 무한 반복하게 되는 취향 저격 트랙 ♬",
+        tags: ["청량", "드라이브송"],
         date: "2026. 09. 07",
         comments: []
       },
@@ -990,6 +1007,7 @@
         rating: 5,
         cover: "./no_good.webp",
         body: "묵직한 베이스와 절제된 안무 포인트가 어우러진 강렬한 트랙. 파워풀한 보컬과 힙합 기반의 세련된 프로덕션이 XG만의 색을 확실하게 각인시켜주는 곡.",
+        tags: ["걸그룹", "힙합", "퍼포먼스"],
         date: "2026. 09. 17",
         comments: []
       },
@@ -1000,6 +1018,7 @@
         rating: 5,
         cover: "./moon_lover.png",
         body: "현대 여성이 고려시대로 타임슬립하며 왕자들과 얽히는 사극 로맨스. 이준기와 아이유의 애틋한 케미, 그리고 마지막까지 여운이 진하게 남는 서정적인 결말이 오래도록 회자되는 명작.",
+        tags: ["사극", "타임슬립", "로맨스"],
         date: "2026. 09. 16",
         comments: []
       },
@@ -1105,6 +1124,12 @@
       return `<div class="note-rating">${fullStars}${emptyStars} <span class="rating-num">(${r}.0)</span></div>`;
     }
 
+    function renderTags(tags, color) {
+      if (!tags || tags.length === 0) return '';
+      const tagStyle = `color: ${color}; background: color-mix(in srgb, ${color} 15%, transparent);`;
+      return `<div class="note-tags">${tags.map(t => `<span class="note-tag" style="${tagStyle}">#${escapeHTML(t)}</span>`).join('')}</div>`;
+    }
+
     function renderPosts() {
       const filtered = activeTab === "전체"
         ? archivePosts.filter(p => p.category !== "위시리스트")
@@ -1178,6 +1203,7 @@
                   <h3 class="note-title">${escapeHTML(post.title)}</h3>
                   ${!isWish ? renderStars(post.rating) : ''}
                   <p class="note-body">${escapeHTML(post.body)}</p>
+                  ${!isWish ? renderTags(post.tags, badgeColor) : ''}
                 `}
               </div>
             </div>
