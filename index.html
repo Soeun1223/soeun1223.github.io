@@ -23,9 +23,9 @@
       --tab-drama: #9b5de5;
       --tab-anime: #00bbf9;
       --tab-movie: #f15bb5;
-      --tab-music: #00f5d4;
-      --tab-wish: #fee440;
-      --color-wish-badge: #ca8a04;
+      --tab-music: #06c2bc;
+      --tab-wish: #f79d1b;
+      --color-wish-badge: var(--tab-wish);
 
       --radius-cover: 22px;
       --radius-inner: 16px;
@@ -600,7 +600,7 @@
     .tab-item[data-cat="애니메이션"].active { --tab-color: var(--tab-anime); }
     .tab-item[data-cat="영화"].active { --tab-color: var(--tab-movie); }
     .tab-item[data-cat="음악"].active { --tab-color: var(--tab-music); }
-    .tab-item[data-cat="위시리스트"].active { --tab-color: #ca8a04; }
+    .tab-item[data-cat="위시리스트"].active { --tab-color: var(--tab-wish); }
 
     .empty-state {
       text-align: center;
@@ -726,7 +726,7 @@
       "애니메이션": "var(--tab-anime)",
       "영화": "var(--tab-movie)",
       "음악": "var(--tab-music)",
-      "위시리스트": "#ca8a04"
+      "위시리스트": "var(--tab-wish)"
     };
 
     let activeTab = "전체";
