@@ -325,6 +325,15 @@
       border-radius: 10px;
     }
 
+    .carousel-wrap {
+      display: contents;
+    }
+
+    .carousel-arrow,
+    .carousel-dots {
+      display: none;
+    }
+
     /* 포스트 카드 */
     .note-card {
       background: #ffffff;
@@ -655,9 +664,76 @@
         order: 3;
       }
 
+      .carousel-wrap {
+        display: flex;
+        position: relative;
+        align-items: stretch;
+      }
+
       .page-scroll-content {
-        flex: none;
-        overflow: visible;
+        flex: 1;
+        min-width: 0;
+        overflow-x: auto;
+        overflow-y: visible;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 0;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-right: 0;
+      }
+
+      .page-scroll-content::-webkit-scrollbar {
+        display: none;
+      }
+
+      .note-card {
+        flex: 0 0 100%;
+        scroll-snap-align: center;
+      }
+
+      .carousel-arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(255, 255, 255, 0.92);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        font-size: 18px;
+        line-height: 1;
+        color: var(--text-main);
+        cursor: pointer;
+        z-index: 5;
+      }
+
+      .carousel-arrow-left { left: 2px; }
+      .carousel-arrow-right { right: 2px; }
+
+      .carousel-dots {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 6px;
+        padding: 12px 0 2px;
+      }
+
+      .carousel-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #d6dee4;
+        transition: background-color 0.2s;
+      }
+
+      .carousel-dot.active {
+        background: var(--primary);
       }
 
       .index-tabs {
@@ -752,7 +828,12 @@
 
         </div>
 
-        <section class="page-scroll-content" id="records-container"></section>
+        <div class="carousel-wrap">
+          <button class="carousel-arrow carousel-arrow-left" id="carousel-prev" type="button" aria-label="이전 글">‹</button>
+          <section class="page-scroll-content" id="records-container"></section>
+          <button class="carousel-arrow carousel-arrow-right" id="carousel-next" type="button" aria-label="다음 글">›</button>
+        </div>
+        <div class="carousel-dots" id="carousel-dots"></div>
       </main>
     </div>
 
@@ -803,6 +884,34 @@
     const container = document.getElementById("records-container");
     const tabButtons = document.querySelectorAll(".tab-item");
     const titleText = document.getElementById("title-text");
+    const carouselDots = document.getElementById("carousel-dots");
+    const carouselPrev = document.getElementById("carousel-prev");
+    const carouselNext = document.getElementById("carousel-next");
+
+    function renderCarouselDots(count) {
+      carouselDots.innerHTML = Array.from({ length: count }, (_, i) =>
+        `<span class="carousel-dot ${i === 0 ? 'active' : ''}"></span>`
+      ).join('');
+    }
+
+    function updateActiveDot() {
+      const dots = carouselDots.querySelectorAll(".carousel-dot");
+      if (!dots.length || !container.clientWidth) return;
+      const idx = Math.round(container.scrollLeft / container.clientWidth);
+      dots.forEach((d, i) => d.classList.toggle("active", i === idx));
+    }
+
+    container.addEventListener("scroll", () => {
+      window.requestAnimationFrame(updateActiveDot);
+    });
+
+    carouselPrev.addEventListener("click", () => {
+      container.scrollBy({ left: -container.clientWidth, behavior: "smooth" });
+    });
+
+    carouselNext.addEventListener("click", () => {
+      container.scrollBy({ left: container.clientWidth, behavior: "smooth" });
+    });
 
     function renderStars(rating) {
       if (rating === null || rating === undefined) return '';
@@ -826,6 +935,8 @@
         : archivePosts.filter(p => p.category === activeTab);
 
       titleText.textContent = activeTab === "전체" ? "전체보기" : activeTab;
+      renderCarouselDots(filtered.length);
+      container.scrollLeft = 0;
 
       if (filtered.length === 0) {
         container.innerHTML = `<div class="empty-state">아직 남겨진 [${activeTab}] 기록이 없습니다 ˙ᵕ˙</div>`;
