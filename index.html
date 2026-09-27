@@ -465,6 +465,13 @@
       margin-left: 2px;
     }
 
+    .note-rating .half-star {
+      display: inline-block;
+      width: 0.5em;
+      overflow: hidden;
+      vertical-align: bottom;
+    }
+
     .note-body {
       font-size: 13px;
       color: var(--text-sub);
@@ -737,10 +744,12 @@
 
     function renderStars(rating) {
       if (rating === null || rating === undefined) return '';
-      const r = parseInt(rating, 10) || 5;
-      const fullStars = '★'.repeat(r);
-      const emptyStars = '☆'.repeat(5 - r);
-      return `<div class="note-rating">${fullStars}${emptyStars} <span class="rating-num">(${r}.0)</span></div>`;
+      const r = parseFloat(rating) || 5;
+      const fullCount = Math.floor(r);
+      const hasHalf = r - fullCount >= 0.5;
+      const emptyCount = 5 - fullCount - (hasHalf ? 1 : 0);
+      const stars = '★'.repeat(fullCount) + (hasHalf ? '<span class="half-star">★</span>' : '') + '☆'.repeat(emptyCount);
+      return `<div class="note-rating">${stars} <span class="rating-num">(${r.toFixed(1)})</span></div>`;
     }
 
     function renderTags(tags, color) {
