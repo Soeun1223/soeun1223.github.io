@@ -617,6 +617,68 @@
     }
 
     @media (max-width: 768px) {
+      body {
+        padding: 12px;
+        align-items: flex-start;
+      }
+
+      .binder-container {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        min-height: 0;
+        padding: 0;
+        flex-direction: column;
+      }
+
+      .spring-column {
+        display: none;
+      }
+
+      .binder-inner {
+        display: contents;
+      }
+
+      .binder-aside {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #edf2f7;
+        padding: 20px 16px;
+        order: 1;
+      }
+
+      .binder-page {
+        height: auto;
+        overflow: visible;
+        padding: 20px 16px;
+        order: 3;
+      }
+
+      .page-scroll-content {
+        flex: none;
+        overflow: visible;
+      }
+
+      .index-tabs {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        padding: 16px;
+        margin-left: 0;
+        order: 2;
+      }
+
+      .tab-item, .tab-item.active, .tab-item:hover {
+        width: 100%;
+        writing-mode: horizontal-tb;
+        text-orientation: initial;
+        letter-spacing: normal;
+        padding: 10px 0;
+        border-radius: 20px;
+        border: 1px solid var(--cover-border);
+      }
+
       .note-card-content {
         flex-direction: column;
       }
@@ -791,7 +853,7 @@
               <div class="note-img-wrap ${isMusic ? 'is-music' : ''}">
                 ${post.cover ? `
                   <div class="note-img-filled-wrap">
-                    <img src="${post.cover}" class="note-img-filled" alt="${escapeHTML(post.title)}" />
+                    <img src="${post.cover}" class="note-img-filled" alt="${escapeHTML(post.title)}" loading="lazy" decoding="async" />
                   </div>
                 ` : `
                   <div class="note-img-empty">
@@ -804,7 +866,7 @@
                 <h3 class="note-title">${escapeHTML(post.title)}</h3>
                 ${!isWish ? renderStars(post.rating) : ''}
                 <p class="note-body">${escapeHTML(post.body)}</p>
-                ${!isWish ? renderTags(post.tags, badgeColor) : ''}
+                ${renderTags(post.tags, badgeColor)}
               </div>
             </div>
 
