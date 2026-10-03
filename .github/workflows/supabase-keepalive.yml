@@ -1,0 +1,18 @@
+name: Supabase keep-alive
+
+# 무료 Supabase 프로젝트는 일주일 동안 요청이 없으면 일시정지된다.
+# 3일마다 방명록을 한 번 읽어서 깨어 있게 한다.
+on:
+  schedule:
+    - cron: "0 0 */3 * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read guestbook
+        run: |
+          curl --fail --silent --show-error \
+            "https://kcuqntdbmxcvomqbvukw.supabase.co/rest/v1/guestbook?select=id&limit=1" \
+            -H "apikey: sb_publishable_Mhvt-7_ksYtPABLFw82GAA__sh_2uEk"
