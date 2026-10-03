@@ -1207,7 +1207,9 @@
         flex: 1;
         min-width: 0;
         overflow-x: auto;
-        overflow-y: visible;
+        overflow-y: hidden;
+        align-items: flex-start;
+        transition: height 0.2s ease;
         flex-direction: row;
         flex-wrap: nowrap;
         gap: 0;
@@ -1223,7 +1225,14 @@
 
       .note-card {
         flex: 0 0 100%;
+        align-self: flex-start;
         scroll-snap-align: center;
+      }
+
+      /* 사진 없는 짧은 카드는 좌우 화살표가 글자를 가리지 않게 여백을 둔다 */
+      .note-card.is-text-only {
+        padding-left: 44px;
+        padding-right: 44px;
       }
 
       .carousel-arrow {
@@ -1486,7 +1495,22 @@
       if (!dots.length || !container.clientWidth) return;
       const idx = Math.round(container.scrollLeft / container.clientWidth);
       dots.forEach((d, i) => d.classList.toggle("active", i === idx));
+      fitCarouselHeight();
     }
+
+    // 모바일 카드 넘기기: 영역 높이를 지금 보이는 카드에 맞춘다 (짧은 카드 아래 빈 공간 제거)
+    function fitCarouselHeight() {
+      const cards = container.querySelectorAll(".note-card");
+      if (getComputedStyle(container).flexDirection !== "row" || !cards.length || !container.clientWidth) {
+        container.style.height = "";
+        return;
+      }
+      const idx = Math.min(cards.length - 1, Math.round(container.scrollLeft / container.clientWidth));
+      container.style.height = `${cards[idx].offsetHeight}px`;
+    }
+
+    container.addEventListener("load", fitCarouselHeight, true);
+    window.addEventListener("resize", fitCarouselHeight);
 
     container.addEventListener("scroll", () => {
       window.requestAnimationFrame(updateActiveDot);
@@ -1743,6 +1767,7 @@
         renderCarouselDots(0);
         container.scrollLeft = 0;
         container.scrollTop = 0;
+        container.style.height = "";
         if (activeTab === "전체") renderHome();
         else renderGuestbook();
         return;
@@ -1761,6 +1786,7 @@
 
       if (filtered.length === 0) {
         container.innerHTML = `<div class="empty-state">아직 남겨진 [${activeTab}] 기록이 없습니다 ˙ᵕ˙</div>`;
+        fitCarouselHeight();
         return;
       }
 
@@ -1772,7 +1798,7 @@
         const isMusic = displayCategoryName === "음악";
 
         return `
-          <article class="note-card">
+          <article class="note-card ${post.recommendedBy ? 'is-text-only' : ''}">
             <div class="note-card-header">
               <span class="note-category-tag" style="color: ${badgeColor};">
                 ● ${displayCategoryName}
@@ -1805,6 +1831,7 @@
           </article>
         `;
       }).join('');
+      fitCarouselHeight();
     }
 
     // 3. 방명록 (Supabase에 저장)
