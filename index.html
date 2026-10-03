@@ -198,21 +198,6 @@
       margin-bottom: 10px;
     }
 
-    .bgm-tag-aside {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #ffffff;
-      border: 1px solid var(--note-border);
-      border-radius: 10px;
-      padding: 6px 12px;
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--text-sub);
-      margin-bottom: 6px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-    }
-
     .insta-tag-aside {
       display: flex;
       align-items: center;
@@ -280,6 +265,36 @@
       display: flex;
       align-items: center;
       gap: 8px;
+    }
+
+    /* 정렬 버튼 */
+    .sort-toggle {
+      display: flex;
+      gap: 2px;
+      padding: 3px;
+      border-radius: 999px;
+      background: #f1f5f9;
+    }
+
+    .sort-toggle[hidden] {
+      display: none;
+    }
+
+    .sort-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      border-radius: 999px;
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .sort-btn[aria-pressed="true"] {
+      background: #ffffff;
+      color: var(--text-main);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
     }
 
     /* 음악 탭 플레이리스트 */
@@ -777,71 +792,6 @@
       text-align: right;
       font-weight: 700;
       color: var(--text-main);
-    }
-
-    .recent-list {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-
-    .recent-item {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      padding: 0;
-      border: none;
-      background: none;
-      text-align: left;
-      cursor: pointer;
-    }
-
-    .recent-item img {
-      width: 100%;
-      aspect-ratio: 3 / 4;
-      object-fit: cover;
-      border-radius: 10px;
-      border: 1px solid #e2e8f0;
-      transition: transform 0.2s;
-    }
-
-    .recent-empty {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      aspect-ratio: 3 / 4;
-      border-radius: 10px;
-      border: 1px dashed #cbd5e1;
-      background: #f8fafc;
-      font-size: 20px;
-    }
-
-    .recent-item:hover img {
-      transform: translateY(-2px);
-    }
-
-    .recent-cat {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--text-sub);
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .recent-cat i {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--seg-color);
-    }
-
-    .recent-title {
-      font-size: 13px;
-      font-weight: 800;
-      color: var(--text-main);
-      line-height: 1.35;
     }
 
     /* 취향 궁합 테스트 */
@@ -1415,12 +1365,7 @@
 
             <div class="profile-desc">
               <h2>안녕하세요.<br>콘텐츠를 좋아하는<br>이소은입니다 ˙ᵕ˙</h2>
-              <p>기억에 남는 명대사와 장면, 소중한 플레이리스트를 모아두는 아카이브 다이어리입니다.</p>
-
-              <div class="bgm-tag-aside">
-                <span>♬ Tuide - Sunkiss</span>
-                <span style="color: #3b82f6; cursor: pointer;">▶</span>
-              </div>
+              <p>좋아하는 드라마, 영화, 애니, 음악을 기록하고 취향을 나누는 아카이브 다이어리입니다. 방명록에 추천도 남겨주세요 ♬</p>
 
               <a href="https://instagram.com/stheunl" target="_blank" class="insta-tag-aside" title="인스타그램 바로가기">
                 <span>📷 insta. @stheunl</span>
@@ -1440,7 +1385,10 @@
           <div class="title-group">
             <h1 class="page-title" id="title-text">소은의 취향 리포트</h1>
           </div>
-
+          <div class="sort-toggle" id="sort-toggle" hidden>
+            <button type="button" class="sort-btn" data-sort="latest" aria-pressed="true">최신순</button>
+            <button type="button" class="sort-btn" data-sort="rating" aria-pressed="false">별점순</button>
+          </div>
         </div>
 
         <div class="playlist-box" id="playlist-box">
@@ -1580,11 +1528,6 @@
     // 홈: posts.json 으로 취향 리포트를 계산해서 보여준다
     const reportCategories = ["음악", "드라마", "영화", "애니메이션"];
 
-    function parsePostDate(str) {
-      const [y, m, d] = String(str).split(".").map(s => parseInt(s, 10));
-      return new Date(y, (m || 1) - 1, d || 1).getTime();
-    }
-
     function renderStatRows(rows) {
       return `<ul class="stat-list">${rows.map(r => `
         <li class="stat-row" style="--seg-color: ${r.color};" title="${escapeHTML(r.title)}">
@@ -1621,19 +1564,6 @@
         return { label: c.cat, value: `★${avg.toFixed(1)}`, ratio: avg / 5, color: categoryColors[c.cat], dot: true, title: `${c.cat} 평균 별점 ${avg.toFixed(2)} (${rated.length}개)` };
       });
 
-      const recent = [...records]
-        .sort((a, b) => parsePostDate(b.date) - parsePostDate(a.date) || b.id - a.id)
-        .slice(0, 3);
-      const recentItems = recent.map(p => {
-        return `
-          <button type="button" class="recent-item" onclick="goToPost(${p.id})">
-            ${p.cover ? `<img src="${p.cover}" alt="" decoding="async" />` : `<span class="recent-empty">📷</span>`}
-            <span class="recent-cat" style="--seg-color: ${categoryColors[p.category]};"><i></i>${p.category}</span>
-            <span class="recent-title">${escapeHTML(p.title)}</span>
-          </button>
-        `;
-      }).join('');
-
       container.innerHTML = `
         <div class="home">
           <section class="home-card">
@@ -1656,31 +1586,11 @@
             </section>
           </div>
 
-          <section class="home-card">
-            <h3>최근 추가한 기록 <small>누르면 해당 기록으로 이동해요</small></h3>
-            <div class="recent-list">${recentItems}</div>
-          </section>
-
           <section class="home-card match-card" id="match-card"></section>
         </div>
       `;
       renderMatch();
     }
-
-    // 최근 기록 → 해당 탭으로 이동해서 그 카드를 보여준다
-    window.goToPost = function(id) {
-      const post = archivePosts.find(p => p.id === id);
-      if (!post) return;
-      const btn = document.querySelector(`.tab-item[data-cat="${post.category}"]`);
-      if (btn) btn.click();
-      const card = container.querySelector(`[data-id="${id}"]`);
-      if (!card) return;
-      if (getComputedStyle(container).flexDirection === "row") {
-        container.scrollLeft = card.offsetLeft - container.offsetLeft;
-      } else {
-        container.scrollTop = card.offsetTop - container.offsetTop;
-      }
-    };
 
     // 취향 궁합 테스트: 무작위 10개 작품에 좋아/별로/안 봤어를 고르면
     // 소은의 별점(4점 이상 = 좋아)과 얼마나 같은지 계산한다
@@ -1779,7 +1689,32 @@
     };
 
 
+    // 드라마/애니/영화/음악 탭 정렬 (위시, 방명록, 홈 제외)
+    let sortMode = "latest";
+    const sortToggle = document.getElementById("sort-toggle");
+
+    function parsePostDate(str) {
+      const [y, m, d] = String(str).split(".").map(s => parseInt(s, 10));
+      return new Date(y, (m || 1) - 1, d || 1).getTime();
+    }
+
+    function sortPosts(posts) {
+      const byLatest = (a, b) => parsePostDate(b.date) - parsePostDate(a.date) || b.id - a.id;
+      posts.sort(sortMode === "rating"
+        ? (a, b) => (b.rating || 0) - (a.rating || 0) || byLatest(a, b)
+        : byLatest);
+    }
+
+    sortToggle.querySelectorAll(".sort-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        sortMode = btn.dataset.sort;
+        sortToggle.querySelectorAll(".sort-btn").forEach(b => b.setAttribute("aria-pressed", b === btn));
+        renderPosts();
+      });
+    });
+
     function renderPosts() {
+      sortToggle.hidden = ["전체", "위시리스트", "방명록"].includes(activeTab);
       const isSingle = activeTab === "전체" || activeTab === "방명록";
       carouselWrap.classList.toggle("is-single", isSingle);
       if (isSingle) {
@@ -1796,6 +1731,7 @@
       if (activeTab === "위시리스트" && recommendations === null) loadRecommendations();
       const filtered = archivePosts.filter(p => p.category === activeTab)
         .concat(activeTab === "위시리스트" ? (recommendations || []) : []);
+      if (activeTab !== "위시리스트") sortPosts(filtered);
 
       titleText.textContent = activeTab;
       updatePlaylist();
@@ -1816,7 +1752,7 @@
         const isMusic = displayCategoryName === "음악";
 
         return `
-          <article class="note-card" data-id="${post.id}">
+          <article class="note-card">
             <div class="note-card-header">
               <span class="note-category-tag" style="color: ${badgeColor};">
                 ● ${displayCategoryName}
