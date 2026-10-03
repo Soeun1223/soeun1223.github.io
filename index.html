@@ -474,6 +474,27 @@
       padding: 3px 10px;
     }
 
+    .note-listen {
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--tab-music);
+      background: color-mix(in srgb, var(--tab-music) 12%, transparent);
+      border: 1px solid color-mix(in srgb, var(--tab-music) 30%, transparent);
+      transition: background-color 0.2s;
+    }
+
+    .note-listen:hover {
+      background: color-mix(in srgb, var(--tab-music) 22%, transparent);
+    }
+
     /* 우측 인덱스 탭 */
     .index-tabs {
       display: flex;
@@ -839,6 +860,11 @@
       return `<div class="note-tags">${tags.map(t => `<span class="note-tag" style="${tagStyle}">#${escapeHTML(t)}</span>`).join('')}</div>`;
     }
 
+    function renderListen(url) {
+      if (!url || !url.startsWith('https://www.youtube.com/')) return '';
+      return `<a class="note-listen" href="${escapeHTML(url)}" target="_blank" rel="noopener">▶ YouTube에서 듣기</a>`;
+    }
+
     function renderPosts() {
       const filtered = activeTab === "전체"
         ? archivePosts.filter(p => p.category !== "위시리스트")
@@ -887,6 +913,7 @@
                 ${!isWish ? renderStars(post.rating) : ''}
                 <p class="note-body">${escapeHTML(post.body)}</p>
                 ${renderTags(post.tags, badgeColor)}
+                ${renderListen(post.youtube)}
               </div>
             </div>
           </article>
