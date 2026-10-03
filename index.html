@@ -1781,7 +1781,7 @@
             </div>
 
             <div class="note-card-content">
-              <div class="note-img-wrap ${isMusic ? 'is-music' : ''}">
+              ${post.recommendedBy ? '' : `<div class="note-img-wrap ${isMusic ? 'is-music' : ''}">
                 ${post.cover ? `
                   <div class="note-img-filled-wrap">
                     <img src="${post.cover}" class="note-img-filled" alt="${escapeHTML(post.title)}" loading="lazy" decoding="async" />
@@ -1791,7 +1791,7 @@
                     <span>📷 ${isMusic ? '앨범 커버' : '포스터'} 없음</span>
                   </div>
                 `}
-              </div>
+              </div>`}
 
               <div class="note-text-wrap">
                 <h3 class="note-title">${escapeHTML(post.title)}</h3>
