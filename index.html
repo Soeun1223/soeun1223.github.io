@@ -531,25 +531,42 @@
       padding: 3px 10px;
     }
 
-    .note-listen {
-      align-self: flex-start;
+    .note-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .note-link {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      margin-top: 12px;
       padding: 6px 14px;
       border-radius: 999px;
       font-size: 12px;
       font-weight: 700;
       text-decoration: none;
-      color: var(--tab-music);
-      background: color-mix(in srgb, var(--tab-music) 12%, transparent);
-      border: 1px solid color-mix(in srgb, var(--tab-music) 30%, transparent);
+      color: var(--link-color);
+      background: color-mix(in srgb, var(--link-color) 12%, transparent);
+      border: 1px solid color-mix(in srgb, var(--link-color) 30%, transparent);
       transition: background-color 0.2s;
     }
 
-    .note-listen:hover {
-      background: color-mix(in srgb, var(--tab-music) 22%, transparent);
+    .note-link-empty {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: #f1f5f9;
+      border: 1px dashed #cbd5e1;
+    }
+
+    .note-link:hover {
+      background: color-mix(in srgb, var(--link-color) 22%, transparent);
     }
 
     /* 우측 인덱스 탭 */
@@ -939,9 +956,18 @@
       return `<div class="note-tags">${tags.map(t => `<span class="note-tag" style="${tagStyle}">#${escapeHTML(t)}</span>`).join('')}</div>`;
     }
 
-    function renderListen(url) {
-      if (!url || !url.startsWith('https://www.youtube.com/')) return '';
-      return `<a class="note-listen" href="${escapeHTML(url)}" target="_blank" rel="noopener">▶ YouTube에서 듣기</a>`;
+    // 음악은 YouTube, 나머지는 OTT 공식 페이지로 연결하는 버튼
+    function renderLinks(post, color) {
+      const links = post.youtube
+        ? [{ label: "YouTube에서 듣기", url: post.youtube }]
+        : (post.ott || []).map(o => ({ label: `${o.name}에서 보기`, url: o.url }));
+      const safe = links.filter(l => typeof l.url === "string" && l.url.startsWith("https://"));
+      if (safe.length === 0) {
+        return post.category === "음악" ? '' : `<span class="note-link-empty">아직 OTT에 공개되지 않았어요</span>`;
+      }
+      return `<div class="note-links" style="--link-color: ${color};">${safe.map(l =>
+        `<a class="note-link" href="${escapeHTML(l.url)}" target="_blank" rel="noopener">▶ ${escapeHTML(l.label)}</a>`
+      ).join('')}</div>`;
     }
 
     function renderPosts() {
@@ -993,7 +1019,7 @@
                 ${!isWish ? renderStars(post.rating) : ''}
                 <p class="note-body">${escapeHTML(post.body)}</p>
                 ${renderTags(post.tags, badgeColor)}
-                ${renderListen(post.youtube)}
+                ${renderLinks(post, badgeColor)}
               </div>
             </div>
           </article>
