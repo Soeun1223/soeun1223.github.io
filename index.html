@@ -281,6 +281,63 @@
       gap: 8px;
     }
 
+    /* 음악 탭 플레이리스트 */
+    .playlist-box {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 18px;
+      margin-bottom: 18px;
+      border-radius: 14px;
+      background: color-mix(in srgb, var(--tab-music) 8%, #ffffff);
+      border: 1px solid color-mix(in srgb, var(--tab-music) 25%, transparent);
+    }
+
+    .playlist-box.show {
+      display: flex;
+    }
+
+    .playlist-info h2 {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 2px;
+    }
+
+    .playlist-info p {
+      font-size: 12px;
+      color: var(--text-sub);
+    }
+
+    .playlist-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .playlist-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 7px 16px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      color: #ffffff;
+      transition: opacity 0.2s;
+    }
+
+    .playlist-btn:hover {
+      opacity: 0.85;
+    }
+
+    .playlist-btn.youtube { background: #e62117; }
+    .playlist-btn.apple { background: #fa2d48; }
+
     /* 본문 스크롤 영역 */
     .page-scroll-content {
       flex: 1;
@@ -686,6 +743,12 @@
         border: 1px solid var(--cover-border);
       }
 
+      .playlist-box.show {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+      }
+
       .note-card-content {
         flex-direction: column;
       }
@@ -759,6 +822,17 @@
 
         </div>
 
+        <div class="playlist-box" id="playlist-box">
+          <div class="playlist-info">
+            <h2>🎧 소은 Pick 음악 플레이리스트</h2>
+            <p>음악 탭의 곡들을 한 번에 들어보세요</p>
+          </div>
+          <div class="playlist-actions">
+            <a class="playlist-btn youtube" href="https://www.youtube.com/playlist?list=PLKEW4X9Fp3L8" target="_blank" rel="noopener">▶ YouTube에서 듣기</a>
+            <a class="playlist-btn apple" href="https://music.apple.com/kr/playlist/%EC%86%8C%EC%9D%80-pick-%EC%9D%8C%EC%95%85/pl.u-aZb0NJvs1p9ye3D" target="_blank" rel="noopener">♫ Apple Music에서 듣기</a>
+          </div>
+        </div>
+
         <div class="carousel-wrap">
           <button class="carousel-arrow carousel-arrow-left" id="carousel-prev" type="button" aria-label="이전 글">‹</button>
           <section class="page-scroll-content" id="records-container"></section>
@@ -818,6 +892,11 @@
     const carouselDots = document.getElementById("carousel-dots");
     const carouselPrev = document.getElementById("carousel-prev");
     const carouselNext = document.getElementById("carousel-next");
+    const playlistBox = document.getElementById("playlist-box");
+
+    function updatePlaylist() {
+      playlistBox.classList.toggle("show", activeTab === "음악");
+    }
 
     function renderCarouselDots(count) {
       carouselDots.innerHTML = Array.from({ length: count }, (_, i) =>
@@ -871,6 +950,7 @@
         : archivePosts.filter(p => p.category === activeTab);
 
       titleText.textContent = activeTab === "전체" ? "전체보기" : activeTab;
+      updatePlaylist();
       renderCarouselDots(filtered.length);
       container.scrollLeft = 0;
 
