@@ -625,6 +625,453 @@
     .tab-item[data-cat="위시리스트"].active { --tab-color: var(--tab-wish); }
     .tab-item[data-cat="방명록"].active { --tab-color: var(--tab-guest); }
 
+    /* 홈: 취향 리포트 */
+    .home {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .home-card {
+      padding: 18px 20px;
+      border-radius: 14px;
+      background: #ffffff;
+      border: 1px solid #edf2f7;
+    }
+
+    .home-card h3 {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 14px;
+    }
+
+    .home-card h3 small {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-left: 6px;
+    }
+
+    .home-hero {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .home-hero b {
+      font-size: 34px;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--text-main);
+    }
+
+    .home-hero span {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-sub);
+    }
+
+    .home-hero small {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-left: auto;
+    }
+
+    .ratio-bar {
+      display: flex;
+      gap: 2px;
+      height: 14px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .ratio-seg {
+      background: var(--seg-color);
+      cursor: default;
+      transition: opacity 0.15s;
+    }
+
+    .ratio-bar:hover .ratio-seg { opacity: 0.45; }
+    .ratio-bar .ratio-seg:hover { opacity: 1; }
+
+    .ratio-legend {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 16px;
+      font-size: 12px;
+      color: var(--text-sub);
+    }
+
+    .ratio-legend li {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .ratio-legend i,
+    .stat-row i {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--seg-color);
+      flex-shrink: 0;
+    }
+
+    .ratio-legend b {
+      color: var(--text-main);
+    }
+
+    .home-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .stat-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: 92px 1fr 40px;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--text-sub);
+    }
+
+    .stat-row .stat-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 700;
+      color: var(--text-main);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .stat-track {
+      display: block;
+      height: 8px;
+      border-radius: 4px;
+      background: #f1f5f9;
+      overflow: hidden;
+    }
+
+    .stat-fill {
+      display: block;
+      height: 100%;
+      border-radius: 4px;
+      background: var(--seg-color, #94a3b8);
+    }
+
+    .stat-row .stat-value {
+      text-align: right;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .recent-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .recent-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 0;
+      border: none;
+      background: none;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .recent-item img {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      transition: transform 0.2s;
+    }
+
+    .recent-empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      border-radius: 10px;
+      border: 1px dashed #cbd5e1;
+      background: #f8fafc;
+      font-size: 20px;
+    }
+
+    .recent-item:hover img {
+      transform: translateY(-2px);
+    }
+
+    .recent-cat {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-sub);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .recent-cat i {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--seg-color);
+    }
+
+    .recent-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.35;
+    }
+
+    /* 취향 궁합 테스트 */
+    .match-card {
+      background: linear-gradient(160deg, #fdf2f8 0%, #eef6fc 100%);
+      border-color: #f3dbe8;
+    }
+
+    .match-intro {
+      font-size: 12px;
+      color: var(--text-sub);
+      margin: -8px 0 14px;
+      line-height: 1.6;
+    }
+
+    .match-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .match-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .match-row img {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .match-thumb-empty {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      border: 1px dashed #cbd5e1;
+      background: #f8fafc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .match-name {
+      flex: 1;
+      min-width: 0;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-main);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .match-name small {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .match-choices {
+      display: flex;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .match-choice {
+      border: 1px solid #dbe4ea;
+      background: #ffffff;
+      color: var(--text-sub);
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .match-choice[aria-pressed="true"] {
+      background: var(--text-main);
+      border-color: var(--text-main);
+      color: #ffffff;
+    }
+
+    .match-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .match-progress {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .match-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 9px 18px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #ffffff;
+      background: var(--tab-movie);
+      cursor: pointer;
+    }
+
+    .match-btn.ghost {
+      background: #ffffff;
+      color: var(--text-sub);
+      border: 1px solid #dbe4ea;
+    }
+
+    .match-btn:disabled {
+      opacity: 0.45;
+      cursor: default;
+    }
+
+    .match-result {
+      text-align: center;
+      padding: 8px 0 4px;
+    }
+
+    .match-score {
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--tab-movie);
+      line-height: 1.1;
+    }
+
+    .match-grade {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin: 6px 0 4px;
+    }
+
+    .match-sub {
+      font-size: 12px;
+      color: var(--text-sub);
+      margin-bottom: 14px;
+    }
+
+    .match-both {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .match-both span {
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #ffffff;
+      color: var(--text-main);
+      border: 1px solid #f3dbe8;
+    }
+
+    .match-result .match-actions {
+      justify-content: center;
+    }
+
+    /* 방명록 / 추천 전환 */
+    .guest-modes {
+      display: flex;
+      gap: 6px;
+    }
+
+    .guest-mode {
+      flex: 1;
+      border: 1px solid #dbe4ea;
+      background: #ffffff;
+      color: var(--text-sub);
+      border-radius: 999px;
+      padding: 8px 0;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .guest-mode[aria-pressed="true"] {
+      background: var(--tab-guest);
+      border-color: var(--tab-guest);
+      color: #ffffff;
+    }
+
+    .guest-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .guest-row select {
+      max-width: 120px;
+    }
+
+    .guest-rec {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .guest-rec i {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--seg-color);
+    }
+
+    .guest-rec small {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
     /* 방명록 */
     .guestbook {
       display: flex;
@@ -646,6 +1093,20 @@
       font-size: 14px;
       font-weight: 800;
       color: var(--text-main);
+    }
+
+    .guest-form-note {
+      font-size: 12px;
+      color: var(--text-sub);
+      margin-top: -4px;
+    }
+
+    .note-recommended {
+      align-self: flex-start;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--tab-wish);
+      margin: -2px 0 8px;
     }
 
     .guest-input {
@@ -835,12 +1296,30 @@
         z-index: 5;
       }
 
-      .carousel-wrap.is-guestbook .carousel-arrow {
+      .carousel-wrap.is-single .carousel-arrow {
         display: none;
       }
 
-      .guestbook {
+      .guestbook,
+      .home {
         flex: 0 0 100%;
+        min-width: 0;
+      }
+
+      .home-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .match-row {
+        flex-wrap: wrap;
+      }
+
+      .match-choices {
+        width: 100%;
+      }
+
+      .match-choice {
+        flex: 1;
       }
 
       .carousel-arrow-left { left: 2px; }
@@ -959,7 +1438,7 @@
       <main class="binder-page">
         <div class="page-header">
           <div class="title-group">
-            <h1 class="page-title" id="title-text">전체보기</h1>
+            <h1 class="page-title" id="title-text">소은의 취향 리포트</h1>
           </div>
 
         </div>
@@ -1098,25 +1577,231 @@
       ).join('')}</div>`;
     }
 
-    function renderPosts() {
-      carouselWrap.classList.toggle("is-guestbook", activeTab === "방명록");
-      if (activeTab === "방명록") {
-        titleText.textContent = "방명록";
-        updatePlaylist();
-        renderCarouselDots(0);
-        container.scrollLeft = 0;
-        renderGuestbook();
+    // 홈: posts.json 으로 취향 리포트를 계산해서 보여준다
+    const reportCategories = ["음악", "드라마", "영화", "애니메이션"];
+
+    function parsePostDate(str) {
+      const [y, m, d] = String(str).split(".").map(s => parseInt(s, 10));
+      return new Date(y, (m || 1) - 1, d || 1).getTime();
+    }
+
+    function renderStatRows(rows) {
+      return `<ul class="stat-list">${rows.map(r => `
+        <li class="stat-row" style="--seg-color: ${r.color};" title="${escapeHTML(r.title)}">
+          <span class="stat-label">${r.dot ? '<i></i>' : ''}${escapeHTML(r.label)}</span>
+          <span class="stat-track"><span class="stat-fill" style="width: ${r.ratio * 100}%;"></span></span>
+          <span class="stat-value">${r.value}</span>
+        </li>
+      `).join('')}</ul>`;
+    }
+
+    function renderHome() {
+      const records = archivePosts.filter(p => p.category !== "위시리스트");
+      const wishCount = archivePosts.length - records.length;
+      const counts = reportCategories.map(cat => ({ cat, n: records.filter(p => p.category === cat).length }));
+
+      const ratioBar = counts.filter(c => c.n > 0).map(c =>
+        `<span class="ratio-seg" style="flex: ${c.n}; --seg-color: ${categoryColors[c.cat]};" title="${c.cat} ${c.n}개 (${Math.round(c.n / records.length * 100)}%)"></span>`
+      ).join('');
+      const ratioLegend = counts.map(c =>
+        `<li style="--seg-color: ${categoryColors[c.cat]};"><i></i>${c.cat} <b>${c.n}</b> · ${records.length ? Math.round(c.n / records.length * 100) : 0}%</li>`
+      ).join('');
+
+      const tagCounts = {};
+      records.forEach(p => (p.tags || []).forEach(t => { tagCounts[t] = (tagCounts[t] || 0) + 1; }));
+      const topTags = Object.entries(tagCounts).sort((a, b) => b[1] - a[1]).slice(0, 5);
+      const maxTag = topTags.length ? topTags[0][1] : 1;
+      const tagRows = topTags.map(([tag, n]) => ({
+        label: `#${tag}`, value: `${n}회`, ratio: n / maxTag, color: "#94a3b8", title: `#${tag} 태그 ${n}회`
+      }));
+
+      const ratingRows = counts.filter(c => c.n > 0).map(c => {
+        const rated = records.filter(p => p.category === c.cat && typeof p.rating === "number");
+        const avg = rated.reduce((s, p) => s + p.rating, 0) / (rated.length || 1);
+        return { label: c.cat, value: `★${avg.toFixed(1)}`, ratio: avg / 5, color: categoryColors[c.cat], dot: true, title: `${c.cat} 평균 별점 ${avg.toFixed(2)} (${rated.length}개)` };
+      });
+
+      const recent = [...records]
+        .sort((a, b) => parsePostDate(b.date) - parsePostDate(a.date) || b.id - a.id)
+        .slice(0, 3);
+      const recentItems = recent.map(p => {
+        return `
+          <button type="button" class="recent-item" onclick="goToPost(${p.id})">
+            ${p.cover ? `<img src="${p.cover}" alt="" decoding="async" />` : `<span class="recent-empty">📷</span>`}
+            <span class="recent-cat" style="--seg-color: ${categoryColors[p.category]};"><i></i>${p.category}</span>
+            <span class="recent-title">${escapeHTML(p.title)}</span>
+          </button>
+        `;
+      }).join('');
+
+      container.innerHTML = `
+        <div class="home">
+          <section class="home-card">
+            <div class="home-hero">
+              <b>${records.length}</b><span>개의 기록</span>
+              <small>보고 싶은 작품 ${wishCount}개</small>
+            </div>
+            <div class="ratio-bar" role="img" aria-label="카테고리 비율">${ratioBar}</div>
+            <ul class="ratio-legend">${ratioLegend}</ul>
+          </section>
+
+          <div class="home-grid">
+            <section class="home-card">
+              <h3>자주 쓴 태그 TOP 5</h3>
+              ${renderStatRows(tagRows)}
+            </section>
+            <section class="home-card">
+              <h3>카테고리별 평균 별점</h3>
+              ${renderStatRows(ratingRows)}
+            </section>
+          </div>
+
+          <section class="home-card">
+            <h3>최근 추가한 기록 <small>누르면 해당 기록으로 이동해요</small></h3>
+            <div class="recent-list">${recentItems}</div>
+          </section>
+
+          <section class="home-card match-card" id="match-card"></section>
+        </div>
+      `;
+      renderMatch();
+    }
+
+    // 최근 기록 → 해당 탭으로 이동해서 그 카드를 보여준다
+    window.goToPost = function(id) {
+      const post = archivePosts.find(p => p.id === id);
+      if (!post) return;
+      const btn = document.querySelector(`.tab-item[data-cat="${post.category}"]`);
+      if (btn) btn.click();
+      const card = container.querySelector(`[data-id="${id}"]`);
+      if (!card) return;
+      if (getComputedStyle(container).flexDirection === "row") {
+        container.scrollLeft = card.offsetLeft - container.offsetLeft;
+      } else {
+        container.scrollTop = card.offsetTop - container.offsetTop;
+      }
+    };
+
+    // 취향 궁합 테스트: 무작위 10개 작품에 좋아/별로/안 봤어를 고르면
+    // 소은의 별점(4점 이상 = 좋아)과 얼마나 같은지 계산한다
+    const MATCH_SIZE = 10;
+    const MATCH_MIN = 3;
+    let matchItems = [];
+    let matchAnswers = {};
+    let matchDone = false;
+
+    function resetMatch() {
+      const pool = archivePosts.filter(p => p.category !== "위시리스트" && typeof p.rating === "number");
+      for (let i = pool.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [pool[i], pool[j]] = [pool[j], pool[i]];
+      }
+      matchItems = pool.slice(0, MATCH_SIZE);
+      matchAnswers = {};
+      matchDone = false;
+    }
+
+    function matchResult() {
+      const answered = matchItems.filter(p => matchAnswers[p.id] === "like" || matchAnswers[p.id] === "dislike");
+      const agree = answered.filter(p => (p.rating >= 4) === (matchAnswers[p.id] === "like"));
+      const score = answered.length ? Math.round(agree.length / answered.length * 100) : 0;
+      const both = answered.filter(p => p.rating >= 4 && matchAnswers[p.id] === "like");
+      return { answered: answered.length, agree: agree.length, score, both };
+    }
+
+    function matchGrade(score) {
+      if (score >= 90) return "💞 영혼의 취향 단짝";
+      if (score >= 70) return "✨ 취향 메이트";
+      if (score >= 50) return "🙂 반쯤 통하는 사이";
+      return "🌱 서로의 취향을 넓혀줄 사이";
+    }
+
+    function renderMatch() {
+      const box = document.getElementById("match-card");
+      if (!box) return;
+      if (matchItems.length === 0) resetMatch();
+      const r = matchResult();
+
+      if (matchDone) {
+        box.innerHTML = `
+          <h3>💘 소은과 취향 궁합</h3>
+          <div class="match-result">
+            <div class="match-score">${r.score}%</div>
+            <div class="match-grade">${matchGrade(r.score)}</div>
+            <p class="match-sub">${r.answered}개 중 ${r.agree}개의 취향이 같았어요</p>
+            ${r.both.length ? `<div class="match-both">${r.both.map(p => `<span>♥ ${escapeHTML(p.title)}</span>`).join('')}</div>` : ''}
+            <div class="match-actions">
+              <button type="button" class="match-btn ghost" onclick="restartMatch()">다시 하기</button>
+            </div>
+          </div>
+        `;
         return;
       }
 
-      const filtered = activeTab === "전체"
-        ? archivePosts.filter(p => p.category !== "위시리스트")
-        : archivePosts.filter(p => p.category === activeTab);
+      const choices = [["like", "좋아"], ["dislike", "별로"], ["skip", "안 봤어"]];
+      box.innerHTML = `
+        <h3>💘 소은과 취향 궁합 테스트</h3>
+        <p class="match-intro">아래 작품들을 어떻게 생각하는지 골라주세요. 소은의 별점과 비교해서 취향 일치율을 알려드려요.</p>
+        <div class="match-list">
+          ${matchItems.map(p => `
+            <div class="match-row">
+              ${p.cover ? `<img src="${p.cover}" alt="" loading="lazy" decoding="async" />` : `<span class="match-thumb-empty">📷</span>`}
+              <span class="match-name">${escapeHTML(p.title)}<small>${p.category}</small></span>
+              <span class="match-choices">
+                ${choices.map(([key, label]) => `
+                  <button type="button" class="match-choice" aria-pressed="${matchAnswers[p.id] === key}" onclick="answerMatch(${p.id}, '${key}')">${label}</button>
+                `).join('')}
+              </span>
+            </div>
+          `).join('')}
+        </div>
+        <div class="match-actions">
+          <span class="match-progress">${r.answered < MATCH_MIN ? `본 작품을 ${MATCH_MIN}개 이상 골라주세요 (${r.answered}/${MATCH_MIN})` : `${r.answered}개 선택 완료`}</span>
+          <button type="button" class="match-btn" ${r.answered < MATCH_MIN ? 'disabled' : ''} onclick="finishMatch()">결과 보기</button>
+        </div>
+      `;
+    }
 
-      titleText.textContent = activeTab === "전체" ? "전체보기" : activeTab;
+    window.answerMatch = function(id, key) {
+      matchAnswers[id] = matchAnswers[id] === key ? undefined : key;
+      renderMatch();
+    };
+
+    window.finishMatch = function() {
+      matchDone = true;
+      renderMatch();
+      document.getElementById("match-card").scrollIntoView({ block: "nearest" });
+    };
+
+    window.restartMatch = function() {
+      resetMatch();
+      renderMatch();
+    };
+
+
+    function renderPosts() {
+      const isSingle = activeTab === "전체" || activeTab === "방명록";
+      carouselWrap.classList.toggle("is-single", isSingle);
+      if (isSingle) {
+        titleText.textContent = activeTab === "전체" ? "소은의 취향 리포트" : "방명록";
+        updatePlaylist();
+        renderCarouselDots(0);
+        container.scrollLeft = 0;
+        container.scrollTop = 0;
+        if (activeTab === "전체") renderHome();
+        else renderGuestbook();
+        return;
+      }
+
+      if (activeTab === "위시리스트" && recommendations === null) loadRecommendations();
+      const filtered = archivePosts.filter(p => p.category === activeTab)
+        .concat(activeTab === "위시리스트" ? (recommendations || []) : []);
+
+      titleText.textContent = activeTab;
       updatePlaylist();
       renderCarouselDots(filtered.length);
       container.scrollLeft = 0;
+      container.scrollTop = 0;
 
       if (filtered.length === 0) {
         container.innerHTML = `<div class="empty-state">아직 남겨진 [${activeTab}] 기록이 없습니다 ˙ᵕ˙</div>`;
@@ -1131,7 +1816,7 @@
         const isMusic = displayCategoryName === "음악";
 
         return `
-          <article class="note-card">
+          <article class="note-card" data-id="${post.id}">
             <div class="note-card-header">
               <span class="note-category-tag" style="color: ${badgeColor};">
                 ● ${displayCategoryName}
@@ -1154,10 +1839,11 @@
 
               <div class="note-text-wrap">
                 <h3 class="note-title">${escapeHTML(post.title)}</h3>
+                ${post.recommendedBy ? `<span class="note-recommended">💡 ${escapeHTML(post.recommendedBy)}님의 추천</span>` : ''}
                 ${!isWish ? renderStars(post.rating) : ''}
                 <p class="note-body">${escapeHTML(post.body)}</p>
                 ${renderTags(post.tags, badgeColor)}
-                ${renderLinks(post, badgeColor)}
+                ${post.recommendedBy ? '' : renderLinks(post, badgeColor)}
               </div>
             </div>
           </article>
@@ -1188,11 +1874,15 @@
       return `${d.getFullYear()}. ${pad(d.getMonth() + 1)}. ${pad(d.getDate())}`;
     }
 
+    // 방명록은 두 가지 모드: 일반 방명록 / 작품 추천 (category, work 가 있는 글)
+    let guestMode = "guest";
+    const recommendCategories = ["드라마", "애니메이션", "영화", "음악"];
+
     function renderGuestEntries(entries) {
       const list = document.getElementById("guest-list");
       if (!list) return;
       if (entries.length === 0) {
-        list.innerHTML = `<div class="empty-state">첫 번째 방명록을 남겨주세요 ˙ᵕ˙</div>`;
+        list.innerHTML = `<div class="empty-state">${guestMode === "guest" ? "첫 번째 방명록을 남겨주세요 ˙ᵕ˙" : "소은에게 첫 번째 작품을 추천해주세요 ˙ᵕ˙"}</div>`;
         return;
       }
       list.innerHTML = entries.map(e => `
@@ -1201,6 +1891,11 @@
             <span class="guest-entry-name">${escapeHTML(e.name)}</span>
             <span class="guest-entry-date">${formatGuestDate(e.created_at)}</span>
           </div>
+          ${e.work ? `
+            <div class="guest-rec" style="--seg-color: ${categoryColors[e.category] || "var(--text-muted)"};">
+              <i></i>${escapeHTML(e.work)} <small>${escapeHTML(e.category)}</small>
+            </div>
+          ` : ''}
           <p class="guest-entry-msg">${escapeHTML(e.message)}</p>
         </div>
       `).join("");
@@ -1208,11 +1903,12 @@
 
     async function loadGuestEntries() {
       const list = document.getElementById("guest-list");
+      const filter = guestMode === "guest" ? "work=is.null" : "work=not.is.null";
       try {
-        const entries = await guestbookFetch("?select=name,message,created_at&order=created_at.desc&limit=200");
+        const entries = await guestbookFetch(`?select=name,message,category,work,created_at&${filter}&order=created_at.desc&limit=200`);
         renderGuestEntries(entries);
       } catch (e) {
-        if (list) list.innerHTML = `<div class="empty-state">방명록을 불러오지 못했어요. 잠시 후 다시 시도해주세요.</div>`;
+        if (list) list.innerHTML = `<div class="empty-state">불러오지 못했어요. 잠시 후 다시 시도해주세요.</div>`;
       }
     }
 
@@ -1222,15 +1918,29 @@
         return;
       }
 
+      const isRec = guestMode === "recommend";
       container.innerHTML = `
         <div class="guestbook">
+          <div class="guest-modes">
+            <button type="button" class="guest-mode" aria-pressed="${!isRec}" onclick="setGuestMode('guest')">✍️ 방명록</button>
+            <button type="button" class="guest-mode" aria-pressed="${isRec}" onclick="setGuestMode('recommend')">💡 추천해주세요</button>
+          </div>
           <form class="guest-form" id="guest-form">
-            <span class="guest-form-title">✍️ 방명록 남기기</span>
+            <span class="guest-form-title">${isRec ? "💡 소은에게 작품 추천하기" : "✍️ 방명록 남기기"}</span>
+            ${isRec ? `<span class="guest-form-note">추천해주신 작품은 소은의 위시리스트에 바로 추가돼요 ♬</span>` : ''}
             <input class="guest-input guest-name" name="name" placeholder="이름" maxlength="20" required />
-            <textarea class="guest-input" name="message" rows="3" placeholder="소은에게 한마디 남겨주세요 ♬" maxlength="300" required></textarea>
+            ${isRec ? `
+              <div class="guest-row">
+                <select class="guest-input" name="category" required>
+                  ${recommendCategories.map(c => `<option value="${c}">${c === "애니메이션" ? "애니" : c}</option>`).join('')}
+                </select>
+                <input class="guest-input" name="work" placeholder="작품 이름" maxlength="60" required />
+              </div>
+            ` : ''}
+            <textarea class="guest-input" name="message" rows="3" placeholder="${isRec ? "어떤 점이 좋은지 알려주세요 ♬" : "소은에게 한마디 남겨주세요 ♬"}" maxlength="300" required></textarea>
             <div class="guest-form-bottom">
               <span class="guest-status" id="guest-status"></span>
-              <button type="submit" class="guest-submit">남기기</button>
+              <button type="submit" class="guest-submit">${isRec ? "추천하기" : "남기기"}</button>
             </div>
           </form>
           <div class="guest-list" id="guest-list">
@@ -1243,14 +1953,53 @@
       loadGuestEntries();
     }
 
+    // 방명록의 추천 글은 위시 탭에 카드로도 보여준다
+    let recommendations = null;
+    let recommendationsLoading = false;
+
+    async function loadRecommendations() {
+      if (recommendationsLoading || !SUPABASE_URL || !SUPABASE_KEY) return;
+      recommendationsLoading = true;
+      try {
+        const rows = await guestbookFetch("?select=id,name,message,category,work,created_at&work=not.is.null&order=created_at.desc&limit=200");
+        recommendations = rows.map(r => ({
+          id: -r.id,
+          category: "위시리스트",
+          subCategory: r.category,
+          title: r.work,
+          body: r.message,
+          date: formatGuestDate(r.created_at),
+          tags: [],
+          recommendedBy: r.name
+        }));
+      } catch (e) {
+        recommendations = [];
+      }
+      recommendationsLoading = false;
+      if (activeTab === "위시리스트") renderPosts();
+    }
+
+    window.setGuestMode = function(mode) {
+      guestMode = mode;
+      renderGuestbook();
+    };
+
     async function submitGuestEntry(e) {
       e.preventDefault();
       const form = e.target;
       const status = document.getElementById("guest-status");
       const button = form.querySelector(".guest-submit");
-      const name = form.elements.name.value.trim();
-      const message = form.elements.message.value.trim();
-      if (!name || !message) return;
+      const isRec = guestMode === "recommend";
+      const entry = {
+        name: form.elements.name.value.trim(),
+        message: form.elements.message.value.trim()
+      };
+      if (isRec) {
+        entry.category = form.elements.category.value;
+        entry.work = form.elements.work.value.trim();
+        if (!entry.work) return;
+      }
+      if (!entry.name || !entry.message) return;
 
       button.disabled = true;
       status.className = "guest-status";
@@ -1259,10 +2008,12 @@
         await guestbookFetch("", {
           method: "POST",
           headers: { Prefer: "return=minimal" },
-          body: JSON.stringify({ name, message })
+          body: JSON.stringify(entry)
         });
         form.elements.message.value = "";
-        status.textContent = "방명록을 남겼어요. 고마워요!";
+        if (isRec) form.elements.work.value = "";
+        status.textContent = isRec ? "추천 고마워요! 위시리스트에 추가됐어요 ♬" : "방명록을 남겼어요. 고마워요!";
+        if (isRec) recommendations = null;
         await loadGuestEntries();
       } catch (err) {
         status.className = "guest-status error";
