@@ -1351,9 +1351,9 @@
       <aside class="binder-aside">
         <div>
           <div class="counter-badge-bar">
-            <span class="today-txt">TODAY <b id="today-val">0</b></span>
+            <span class="today-txt">TODAY <b id="today-val">-</b></span>
             <span style="color:#d1d5db;">|</span>
-            <span class="total-txt">TOTAL <b id="total-val">0</b></span>
+            <span class="total-txt">TOTAL <b id="total-val">-</b></span>
           </div>
 
           <div class="profile-wrap">
@@ -1423,24 +1423,29 @@
   </div>
 
   <script>
-    // 1. 투데이 카운터
-    function initStats() {
-      const todayKey = 'cute_today_' + new Date().toISOString().slice(0, 10);
-      let total = parseInt(localStorage.getItem('cute_total_stat_v18') || '320', 10);
-      let today = parseInt(localStorage.getItem(todayKey) || '0', 10);
-
-      if (!sessionStorage.getItem('cute_session_active_v18')) {
-        total += 1;
-        today += 1;
-        sessionStorage.setItem('cute_session_active_v18', 'true');
-        localStorage.setItem('cute_total_stat_v18', total);
-        localStorage.setItem(todayKey, today);
+    // 1. 투데이 카운터 (Supabase visits 테이블, supabase/visits.sql 참고)
+    // 브라우저 탭 하나당 처음 열 때만 방문으로 센다
+    async function initStats() {
+      const todayEl = document.getElementById('today-val');
+      const totalEl = document.getElementById('total-val');
+      let isNewVisit = true;
+      try { isNewVisit = !sessionStorage.getItem('visit_counted_v1'); } catch (e) {}
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/${isNewVisit ? 'record_visit' : 'get_visits'}`, {
+          method: 'POST',
+          headers: { apikey: SUPABASE_KEY, 'Content-Type': 'application/json' },
+          body: '{}'
+        });
+        if (!res.ok) throw new Error(res.status);
+        const stats = await res.json();
+        if (isNewVisit) try { sessionStorage.setItem('visit_counted_v1', 'true'); } catch (e) {}
+        todayEl.textContent = Number(stats.today).toLocaleString();
+        totalEl.textContent = Number(stats.total).toLocaleString();
+      } catch (e) {
+        todayEl.textContent = '-';
+        totalEl.textContent = '-';
       }
-
-      document.getElementById('total-val').textContent = total.toLocaleString();
-      document.getElementById('today-val').textContent = today.toLocaleString();
     }
-    initStats();
 
     // 2. 게시글 데이터 (각 작품별 사진 파일명 적용)
     let archivePosts = [];
@@ -1989,6 +1994,7 @@
     }
 
     loadPosts();
+    initStats();
   </script>
 </body>
 </html>
