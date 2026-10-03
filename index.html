@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>소은의 아카이브 다이어리 ♬</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%92%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
   <style>
     :root {
@@ -51,6 +52,17 @@
       justify-content: center;
       align-items: center;
       padding: 16px 20px;
+    }
+
+    /* 키보드로 이동할 때 초점이 분명히 보이도록 */
+    a:focus-visible,
+    button:focus-visible,
+    summary:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible,
+    select:focus-visible {
+      outline: 3px solid #2563eb;
+      outline-offset: 2px;
     }
 
     /* 바인더 커버 */
@@ -116,6 +128,8 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      gap: 16px;
+      overflow-y: auto;
     }
 
     .counter-badge-bar {
@@ -213,6 +227,108 @@
       text-decoration: none;
       transition: background-color 0.2s ease;
       box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+    }
+
+    .github-tag-aside {
+      margin-top: 6px;
+      color: var(--text-main);
+    }
+
+    .github-tag-aside:hover {
+      background: #f1f5f9;
+    }
+
+    .project-box {
+      margin-top: 6px;
+      background: #ffffff;
+      border: 1px solid var(--note-border);
+      border-radius: 10px;
+      text-align: left;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+    }
+
+    .project-box summary {
+      padding: 7px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-main);
+      cursor: pointer;
+      text-align: center;
+      border-radius: 10px;
+    }
+
+    .project-box summary small {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-left: 2px;
+    }
+
+    .project-about {
+      padding: 4px 12px 12px;
+    }
+
+    .project-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .project-head b {
+      font-size: 12px;
+      color: var(--text-main);
+    }
+
+    .project-status {
+      flex-shrink: 0;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 999px;
+      color: #475569;
+      background: #e2e8f0;
+    }
+
+    .project-status.is-live {
+      color: #047857;
+      background: #d1fae5;
+    }
+
+    .project-facts dt {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-top: 8px;
+    }
+
+    .project-facts dd {
+      font-size: 11px;
+      line-height: 1.55;
+      color: var(--text-sub);
+      word-break: keep-all;
+      margin: 2px 0 0;
+    }
+
+    .project-facts ul {
+      padding-left: 14px;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .project-links a {
+      font-size: 11px;
+      font-weight: 700;
+      color: #2563eb;
+      text-decoration: none;
+    }
+
+    .project-links a:hover {
+      text-decoration: underline;
     }
 
     .insta-tag-aside:hover {
@@ -1067,11 +1183,10 @@
       font-size: 13px;
       color: var(--text-main);
       background: #ffffff;
-      outline: none;
       resize: none;
     }
 
-    .guest-input:focus {
+    .guest-input:focus-visible {
       border-color: var(--tab-guest);
     }
 
@@ -1158,7 +1273,7 @@
       font-size: 13px;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 960px) {
       body {
         padding: 12px;
         align-items: flex-start;
@@ -1376,9 +1491,38 @@
               <h2>안녕하세요.<br>콘텐츠를 좋아하는<br>이소은입니다 ˙ᵕ˙</h2>
               <p>좋아하는 드라마, 영화, 애니, 음악을 기록하고 취향을 나누는 아카이브 다이어리입니다. 방명록에 추천도 남겨주세요 ♬</p>
 
-              <a href="https://instagram.com/stheunl" target="_blank" class="insta-tag-aside" title="인스타그램 바로가기">
+              <a href="https://instagram.com/stheunl" target="_blank" rel="noopener" class="insta-tag-aside" title="인스타그램 바로가기">
                 <span>📷 insta. @stheunl</span>
               </a>
+              <a href="https://github.com/Soeun1223" target="_blank" rel="noopener" class="insta-tag-aside github-tag-aside" title="GitHub 바로가기">
+                <span>💻 github. @Soeun1223</span>
+              </a>
+
+              <details class="project-box">
+                <summary>📁 프로젝트 소개</summary>
+                <div class="project-about">
+                  <div class="project-head"><b>소은의 아카이브 다이어리</b><span class="project-status is-live">공개 중</span></div>
+                  <dl class="project-facts">
+                    <dt>목적</dt>
+                    <dd>좋아하는 드라마·영화·애니·음악을 기록하고, 방문자와 서로의 취향을 나누는 블로그형 개인 홈페이지</dd>
+                    <dt>주요 기능</dt>
+                    <dd>
+                      <ul>
+                        <li>카테고리별 기록 (별점·태그·최신순/별점순 정렬)</li>
+                        <li>홈의 취향 리포트와 취향 궁합 테스트</li>
+                        <li>음악 바로 듣기·플레이리스트, OTT 바로가기</li>
+                        <li>방명록과 작품 추천 (추천작은 위시에 자동 추가)</li>
+                        <li>실시간 방문자 수</li>
+                      </ul>
+                    </dd>
+                    <dt>현재 상태</dt>
+                    <dd>공개 중이며, 본 작품과 들은 음악을 계속 추가하고 있어요</dd>
+                    <dt>사용 기술</dt>
+                    <dd>HTML·CSS·JavaScript, GitHub Pages, Supabase(방명록·방문자 수), GitHub Actions</dd>
+                  </dl>
+                  <div class="project-links"><a href="https://github.com/Soeun1223/soeun1223.github.io" target="_blank" rel="noopener">GitHub 저장소 보기</a></div>
+                </div>
+              </details>
             </div>
           </div>
         </div>
@@ -1699,7 +1843,7 @@
         <div class="match-list">
           ${matchItems.map(p => `
             <div class="match-row">
-              ${p.cover ? `<img src="${p.cover}" alt="" loading="lazy" decoding="async" />` : `<span class="match-thumb-empty">📷</span>`}
+              ${p.cover ? `<img src="${p.cover}" alt="${escapeHTML(p.title)}" loading="lazy" decoding="async" />` : `<span class="match-thumb-empty">📷</span>`}
               <span class="match-name">${escapeHTML(p.title)}<small>${p.category}</small></span>
               <span class="match-choices">
                 ${choices.map(([key, label]) => `
