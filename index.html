@@ -1605,13 +1605,28 @@
     let matchAnswers = {};
     let matchDone = false;
 
+    function shuffle(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    // 별점(3, 3.5, 4 ...)별로 묶은 뒤 한 개씩 돌아가며 뽑아서
+    // 높은 별점만 나오지 않고 별점대가 고르게 섞이도록 출제한다
     function resetMatch() {
       const pool = archivePosts.filter(p => p.category !== "위시리스트" && typeof p.rating === "number");
-      for (let i = pool.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [pool[i], pool[j]] = [pool[j], pool[i]];
+      const groups = {};
+      pool.forEach(p => { (groups[p.rating] = groups[p.rating] || []).push(p); });
+      const buckets = Object.values(groups).map(shuffle);
+      const picked = [];
+      while (picked.length < MATCH_SIZE && buckets.some(b => b.length)) {
+        shuffle(buckets).forEach(b => {
+          if (b.length && picked.length < MATCH_SIZE) picked.push(b.pop());
+        });
       }
-      matchItems = pool.slice(0, MATCH_SIZE);
+      matchItems = shuffle(picked);
       matchAnswers = {};
       matchDone = false;
     }
@@ -1656,7 +1671,7 @@
       const choices = [["like", "좋아"], ["dislike", "별로"], ["skip", "안 봤어"]];
       box.innerHTML = `
         <h3>💘 소은과 취향 궁합 테스트</h3>
-        <p class="match-intro">아래 작품들을 어떻게 생각하는지 골라주세요. 소은의 별점과 비교해서 취향 일치율을 알려드려요.</p>
+        <p class="match-intro">아래 작품들을 어떻게 생각하는지 골라주세요. 소은의 별점과 비교해서 취향 일치율을 알려드려요.<br>작품은 소은의 기록 중에서 <b>별점대별로 고르게, 무작위로</b> 10개가 출제돼요.</p>
         <div class="match-list">
           ${matchItems.map(p => `
             <div class="match-row">
