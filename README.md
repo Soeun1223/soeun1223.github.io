@@ -40,14 +40,14 @@ python3 -m http.server 8000
 | --- | --- |
 | `index.html` | 화면 전체 (디자인, 탭, 홈 리포트, 궁합 테스트, 방명록) |
 | `posts.json` | 기록 데이터. 글을 추가·수정할 때는 이 파일만 고치면 됩니다 |
-| `*.jpg`, `*.webp` | 포스터·앨범 커버 이미지 |
+| `images/` | 포스터·앨범 커버와 프로필 이미지 |
 | `supabase/guestbook.sql` | 방명록·작품 추천 저장 테이블 설정 |
 | `supabase/visits.sql` | 방문자 수 저장 설정 |
 | `.github/workflows/supabase-keepalive.yml` | 무료 Supabase가 멈추지 않도록 3일마다 한 번 깨우는 자동 작업 |
 
 ### 기록 추가하기
 
-1. 포스터 이미지를 저장소 최상위에 올립니다. (예: `exit.webp`)
+1. 포스터 이미지를 `images` 폴더에 올립니다. (예: `images/exit.webp`)
 2. `posts.json`에 아래 형식으로 기록을 하나 추가합니다. `id`는 다른 기록과 겹치지 않는 숫자로 정합니다.
 
    ```json
@@ -56,7 +56,7 @@ python3 -m http.server 8000
      "category": "영화",
      "title": "엑시트",
      "rating": 4,
-     "cover": "./exit.webp",
+     "cover": "./images/exit.webp",
      "body": "짧은 감상",
      "tags": ["액션", "코미디"],
      "date": "2026. 10. 03",

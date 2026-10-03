@@ -1484,7 +1484,7 @@
             <div class="mood-bubble">✨ TODAY IS... <b>설렘 ♬</b></div>
             
             <div class="avatar-frame">
-              <img id="profile-img" src="./profile.png" alt="프로필 사진" />
+              <img id="profile-img" src="./images/profile.png" alt="프로필 사진" />
             </div>
 
             <div class="profile-desc">
@@ -2171,7 +2171,7 @@
 
     async function loadPosts() {
       try {
-        const res = await fetch('./posts.json');
+        const res = await fetch('./posts.json', { cache: 'no-cache' });
         archivePosts = await res.json();
       } catch (e) {
         archivePosts = [];
