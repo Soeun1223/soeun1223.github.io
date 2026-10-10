@@ -173,6 +173,29 @@
     "date": "2026. 09. 27"
   },
   {
+    "id": 140,
+    "category": "위시리스트",
+    "subCategory": "드라마",
+    "title": "파친코",
+    "rating": null,
+    "cover": "./images/pachinko.jpg",
+    "body": "일제강점기부터 이어지는 한 가족 4대의 이야기를 웅장한 영상미로 담아냈다는 평이 많아서 보고싶다.",
+    "tags": ["시대극", "가족", "대하드라마"],
+    "date": "2026. 10. 10",
+    "ott": [{"name": "애플TV", "url": "https://tv.apple.com/kr/show/pachinko/umc.cmc.17vf6g68dy89kk1l1nnb6min4"}]
+  },
+  {
+    "id": 141,
+    "category": "위시리스트",
+    "subCategory": "드라마",
+    "title": "닥터X: 하얀 마피아의 시대",
+    "rating": null,
+    "cover": "./images/doctorx.jpg",
+    "body": "김지원의 첫 메디컬 도전작으로, 천재 외과의사가 병원 권력에 맞서는 다크 히어로물이라 기대돼서 보고싶다.",
+    "tags": ["메디컬", "누아르"],
+    "date": "2026. 10. 10"
+  },
+  {
     "id": 110,
     "category": "드라마",
     "title": "미지의 서울",
