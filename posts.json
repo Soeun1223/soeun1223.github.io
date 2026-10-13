@@ -1,5 +1,27 @@
 [
   {
+    "id": 143,
+    "category": "음악",
+    "title": "IN MY ROOM - 채영 (TWICE)",
+    "rating": 5,
+    "cover": "./images/inmyroom.jpg",
+    "body": "몽환적인 UK 개러지 사운드에 채영 특유의 음색이 잘 어울리는 곡. 혼자만의 공간에 있는 듯한 편안함이 좋다.",
+    "tags": ["UK개러지", "R&B"],
+    "date": "2026. 10. 13",
+    "youtube": "https://www.youtube.com/watch?v=5zrfR0-qwog"
+  },
+  {
+    "id": 144,
+    "category": "음악",
+    "title": "ICONIC - 에스파",
+    "rating": 5,
+    "cover": "./images/iconic.jpg",
+    "body": "자신감 넘치는 가사와 강렬한 비트가 에스파다운 곡. 수록곡인데도 타이틀 못지않게 중독성 있다.",
+    "tags": ["댄스팝", "힙합"],
+    "date": "2026. 10. 13",
+    "youtube": "https://www.youtube.com/watch?v=gj-lvvYQdiU"
+  },
+  {
     "id": 126,
     "category": "음악",
     "title": "SWICY - 유니스",
