@@ -1,5 +1,16 @@
 [
   {
+    "id": 145,
+    "category": "음악",
+    "title": "TTYL - 루셈블",
+    "rating": 5,
+    "cover": "./images/ttyl.jpg",
+    "body": "통통 튀는 신스 루프 위로 좋아하는 사람과의 귀여운 밀당을 그린 업템포 댄스곡. 경쾌한 에너지 덕분에 기분이 절로 좋아진다.",
+    "tags": ["댄스팝", "신스팝"],
+    "date": "2026. 10. 17",
+    "youtube": "https://www.youtube.com/watch?v=AdFtOCtmq-Q"
+  },
+  {
     "id": 143,
     "category": "음악",
     "title": "IN MY ROOM - 채영 (TWICE)",
