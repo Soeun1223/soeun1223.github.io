@@ -1,5 +1,16 @@
 [
   {
+    "id": 146,
+    "category": "음악",
+    "title": "NEON - A2O LITE",
+    "rating": 5,
+    "cover": "./images/neon.jpg",
+    "body": "묵직한 베이스와 강렬한 댄스 브레이크, 아카펠라 화음까지 정통 K팝의 맛이 살아 있는 데뷔곡. 오랜만에 듣는 익숙한 SM 스타일이라 반갑다.",
+    "tags": ["댄스팝", "SMP"],
+    "date": "2026. 10. 18",
+    "youtube": "https://www.youtube.com/watch?v=D968qfUZMUE"
+  },
+  {
     "id": 145,
     "category": "음악",
     "title": "TTYL - 루셈블",
