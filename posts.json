@@ -164,6 +164,18 @@
     ]
   },
   {
+    "id": 147,
+    "category": "위시리스트",
+    "subCategory": "드라마",
+    "title": "마이 데몬",
+    "rating": null,
+    "cover": "./images/mydemon.jpg",
+    "body": "능력을 잃은 악마와 재벌 상속녀의 계약 결혼이라는 설정에 김유정·송강의 비주얼 케미가 좋다는 평이 많아서 보고싶다.",
+    "tags": ["판타지", "로맨틱코미디"],
+    "date": "2026. 10. 18",
+    "ott": [{"name": "넷플릭스", "url": "https://www.netflix.com/title/81716080"}]
+  },
+  {
     "id": 142,
     "category": "위시리스트",
     "subCategory": "드라마",
