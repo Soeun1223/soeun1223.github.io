@@ -195,7 +195,8 @@
     "cover": "./images/doctorx.jpg",
     "body": "김지원의 첫 메디컬 도전작으로, 천재 외과의사가 병원 권력에 맞서는 다크 히어로물이라 기대돼서 보고싶다.",
     "tags": ["메디컬", "누아르"],
-    "date": "2026. 10. 10"
+    "date": "2026. 10. 10",
+    "ott": [{"name": "넷플릭스", "url": "https://www.netflix.com/title/82682379"}]
   },
   {
     "id": 136,
@@ -248,7 +249,8 @@
     "cover": "./images/100days.webp",
     "body": "시대극 배경 속 정치와 로맨스가 얽히는 서사가 흥미롭다는 평이 많아서 보고싶다.",
     "tags": ["로맨스", "정치", "시대극"],
-    "date": "2026. 09. 27"
+    "date": "2026. 09. 27",
+    "ott": [{"name": "넷플릭스", "url": "https://www.netflix.com/title/82682433"}, {"name": "티빙", "url": "https://www.tving.com/contents/P001791340"}]
   },
   {
     "id": 110,
