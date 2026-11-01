@@ -164,6 +164,30 @@
     ]
   },
   {
+    "id": 148,
+    "category": "위시리스트",
+    "subCategory": "애니메이션",
+    "title": "사이버펑크: 엣지러너",
+    "rating": null,
+    "cover": "./images/edgerunners.jpg",
+    "body": "트리거 특유의 강렬한 작화와 네온빛 세계관, 그리고 여운이 긴 결말이 인상적이라는 평이 많아서 보고싶다.",
+    "tags": ["SF", "액션", "사이버펑크"],
+    "date": "2026. 11. 02",
+    "ott": [{"name": "넷플릭스", "url": "https://www.netflix.com/title/81054853"}]
+  },
+  {
+    "id": 149,
+    "category": "위시리스트",
+    "subCategory": "드라마",
+    "title": "알고있지만",
+    "rating": null,
+    "cover": "./images/nevertheless.jpg",
+    "body": "사랑은 믿지 않지만 연애는 하고 싶은 두 사람의 아슬아슬한 감정선과 송강·한소희의 케미가 좋다는 평이 많아서 보고싶다.",
+    "tags": ["로맨스", "청춘"],
+    "date": "2026. 11. 02",
+    "ott": [{"name": "넷플릭스", "url": "https://www.netflix.com/title/81435649"}, {"name": "티빙", "url": "https://www.tving.com/contents/P001480543"}]
+  },
+  {
     "id": 147,
     "category": "위시리스트",
     "subCategory": "드라마",
