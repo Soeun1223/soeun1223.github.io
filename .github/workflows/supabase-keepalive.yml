@@ -1,18 +1,31 @@
 name: Supabase keep-alive
 
-# 무료 Supabase 프로젝트는 일주일 동안 요청이 없으면 일시정지된다.
-# 3일마다 방명록을 한 번 읽어서 깨어 있게 한다.
+# 무료 Supabase 프로젝트는 7일 동안 활동이 없으면 일시정지된다.
+# 3일마다 방명록만 읽을 때도 2026년 11월에 일시정지된 적이 있어서,
+# 매일 방명록 읽기와 방문자 수 함수 호출을 함께 보낸다.
+# 일시정지되면 이 작업이 실패하고 GitHub가 실패 알림 메일을 보낸다
+# (Supabase 대시보드에서 Resume project를 누르면 데이터 그대로 복구된다).
 on:
   schedule:
-    - cron: "0 0 */3 * *"
+    - cron: "0 0 * * *"
   workflow_dispatch:
 
 jobs:
   ping:
     runs-on: ubuntu-latest
+    env:
+      SUPABASE_URL: https://kcuqntdbmxcvomqbvukw.supabase.co
+      SUPABASE_KEY: sb_publishable_Mhvt-7_ksYtPABLFw82GAA__sh_2uEk
     steps:
       - name: Read guestbook
         run: |
           curl --fail --silent --show-error \
-            "https://kcuqntdbmxcvomqbvukw.supabase.co/rest/v1/guestbook?select=id&limit=1" \
-            -H "apikey: sb_publishable_Mhvt-7_ksYtPABLFw82GAA__sh_2uEk"
+            "$SUPABASE_URL/rest/v1/guestbook?select=id&limit=1" \
+            -H "apikey: $SUPABASE_KEY"
+      - name: Read visit counts
+        run: |
+          curl --fail --silent --show-error -X POST \
+            "$SUPABASE_URL/rest/v1/rpc/get_visits" \
+            -H "apikey: $SUPABASE_KEY" \
+            -H "Content-Type: application/json" \
+            -d '{}'
