@@ -138,6 +138,17 @@
     ]
   },
   {
+    "id": 150,
+    "category": "드라마",
+    "title": "방과후 전쟁활동",
+    "rating": 3.5,
+    "cover": "./images/afterschool.jpg",
+    "body": "최악의 결말.",
+    "tags": ["학원", "SF", "액션"],
+    "date": "2026. 11. 02",
+    "ott": [{"name": "웨이브", "url": "https://www.wavve.com/player/vod?contentid=J4401_J44000000017_01_0001.1"}]
+  },
+  {
     "id": 134,
     "category": "드라마",
     "title": "Mr.플랑크톤",
